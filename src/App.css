@@ -3,6 +3,9 @@
   /* margin: 0 auto; */
   /* padding: 2rem;
   text-align: center; */
+  font-family: 'Syne', sans-serif;
+  background-color: var(--primary-color);
+  color: var(--text-color);
 }
 
 .logo {
