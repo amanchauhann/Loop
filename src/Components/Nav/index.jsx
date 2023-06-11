@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./main.css"
 
 const Nav = () => {
-    const [search_value, setSearch_value] = useState("a");
+    const [search_value, setSearch_value] = useState("");
     const search_value_handler = (e) => {
         setSearch_value(e.target.value);
     }
