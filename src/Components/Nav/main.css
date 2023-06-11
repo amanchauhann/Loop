@@ -1,0 +1,20 @@
+.navigation {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.search_bar {
+    background: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 5px;
+    transition: 0.5s;
+    color: var(--text-color);
+}
+
+.search_bar:focus {
+    outline: none;
+    border: 1px solid grey;
+}
