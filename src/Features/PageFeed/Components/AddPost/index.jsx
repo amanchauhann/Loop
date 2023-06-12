@@ -3,12 +3,13 @@ import "./main.css"
 import { Flex } from "@chakra-ui/layout";
 import { EmojiContainer } from "../EmojiContainer";
 import { useState } from "react";
+import { divider_border } from "../../../../Styles/Global";
 
 const AddPost = () => {
     const [content, set_content] = useState("")
     return (
         // <div className="add_post_container">
-        <Flex w={"25rem"} p={"1rem"} h={"fit-content"} border={"1px solid red"} direction={"column"} gap={"1rem"}>
+        <Flex style={divider_border} p={"1rem"} h={"fit-content"} direction={"column"} gap={"1rem"}>
             <Flex gap={"1rem"} align={"center"}>
                 <Image
                     borderRadius='full'
