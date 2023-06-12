@@ -1,0 +1,29 @@
+.add_post_container {
+    border: 1px solid red;
+}
+
+.add_post_input {
+    background: var(--secondary-color);
+    border-radius: 5px;
+    padding: .5rem;
+    /* for =====desktop==== */
+    /* flex-grow: 1; */
+    outline: 1px solid var(--secondary-color);
+    transition: 0.5s;
+}
+
+.add_post_input:focus {
+    outline: 1px solid grey;
+}
+
+.post_btn {
+    background: var(--primary-color);
+    padding: 4px 1rem;
+    border: 2px solid var(--secondary-color);
+    transition: 0.5s;
+}
+
+.post_btn:hover {
+    background: var(--secondary-color);
+    border: 2px solid var(--primary-color);
+}
