@@ -13,7 +13,7 @@ const PageFeed = () => {
             <Nav />
             <Flex>
                 <SideBar />
-                <Flex w={"25rem"} direction={"column"} gap={"3rem"}>
+                <Flex p={"10px"} w={"25rem"} direction={"column"} gap={"3rem"}>
                     <AddPost />
                     {feedPosts.map(eachFeedPost => <Post key={eachFeedPost._id} {...eachFeedPost} />)}
 
