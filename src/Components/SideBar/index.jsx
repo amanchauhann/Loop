@@ -7,7 +7,9 @@ const SideBar = () => {
         <div className="sidebar_container">
             <Flex direction={"column"} w={"5rem"}>
                 <div className="sidebar_item" align="center">
-                    <i className="fa-solid fa-house fa-xl"></i>
+                    <Link to="/">
+                        <i className="fa-solid fa-house fa-xl"></i>
+                    </Link>
                 </div>
                 <div className="sidebar_item" align="center">
                     <Link to="/explore">
