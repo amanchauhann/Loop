@@ -4,6 +4,7 @@ import SideBar from "../../Components/SideBar"
 import AddPost from "./Components/AddPost"
 import Post from "./Components/Post"
 import { usePosts } from "../../Contexts/PostsProvider"
+import PostsLayout from "../../Layout/PostsLayout"
 
 const PageFeed = () => {
     const { allPosts: { feedPosts } } = usePosts()
@@ -13,10 +14,9 @@ const PageFeed = () => {
             <Nav />
             <Flex>
                 <SideBar />
-                <Flex p={"10px"} w={"25rem"} direction={"column"} gap={"3rem"}>
+                <Flex p={"10px"} maxW={"35rem"} direction={"column"} gap={"3rem"}>
                     <AddPost />
-                    {feedPosts.map(eachFeedPost => <Post key={eachFeedPost._id} {...eachFeedPost} />)}
-
+                    <PostsLayout children={feedPosts.map(eachFeedPost => <Post key={eachFeedPost._id} {...eachFeedPost} />)} />
                 </Flex>
             </Flex>
 
