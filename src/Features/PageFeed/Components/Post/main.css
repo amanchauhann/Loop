@@ -1,3 +1,8 @@
 .post_icon {
     flex-grow: 1;
 }
+
+.sm-text {
+    padding: 3px;
+    font-size: 14px;
+}
