@@ -3,8 +3,11 @@ import { Divider, Flex, Text } from "@chakra-ui/layout"
 import "./main.css"
 import { divider_border } from "../../../../Styles/Global"
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu"
+import { useUsers } from "../../../../Contexts/UsersProvider"
 
-const Post = () => {
+const Post = ({ username, content }) => {
+    const { allUsers: { users } } = useUsers()
+    const { firstName, lastName, displayImg } = users?.find(eachUser => eachUser.username === username)
     return (
         <div>
             <Flex style={divider_border} p={"1rem"} gap={"1rem"} direction={"column"} className="bg_sec">
@@ -13,12 +16,12 @@ const Post = () => {
                         <Image
                             borderRadius='full'
                             boxSize='45px'
-                            src='https://bit.ly/dan-abramov'
-                            alt='Dan Abramov'
+                            src={displayImg}
+                            alt={`portrait of ${firstName} ${lastName}`}
                         />
                         <Flex direction={"column"}>
-                            <Text fontSize='md'>Aman Chauhan</Text>
-                            <Text fontSize="xs">@iamanchauhan</Text>
+                            <Text fontSize='md'>{`${firstName} ${lastName}`}</Text>
+                            <Text fontSize="xs">{username}</Text>
                         </Flex>
                     </Flex>
                     {/* ---Ellipsis--- */}
@@ -33,7 +36,7 @@ const Post = () => {
                                 border: "none",
                             }}
                         >
-                            <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                            <i className="fa-solid fa-ellipsis-vertical fa-lg"></i>
                         </MenuButton>
                         <MenuList bg={"rgb(46, 48, 52)"}>
                             <MenuItem
@@ -63,18 +66,18 @@ const Post = () => {
                 </Flex>
                 {/* <Divider /> */}
                 <Text fontSize={"sm"}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum sint minus est repellendus similique nam asperiores facere veritatis nesciunt illo quibusdam eos cumque blanditiis voluptatem natus, facilis commodi corrupti labore.
+                    {content}
                 </Text>
                 <Divider />
                 <Flex>
                     <div className="post_icon">
-                        <i class="fa-regular fa-thumbs-up fa-lg"></i>
+                        <i className="fa-regular fa-thumbs-up fa-lg"></i>
                     </div>
                     <div className="post_icon">
-                        <i class="fa-regular fa-message fa-lg"></i>
+                        <i className="fa-regular fa-message fa-lg"></i>
                     </div>
                     <div className="post_icon">
-                        <i class="fa-regular fa-bookmark fa-lg"></i>
+                        <i className="fa-regular fa-bookmark fa-lg"></i>
                     </div>
                 </Flex>
             </Flex>

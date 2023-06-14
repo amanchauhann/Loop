@@ -3,8 +3,11 @@ import Nav from "../../Components/Nav"
 import SideBar from "../../Components/SideBar"
 import AddPost from "./Components/AddPost"
 import Post from "./Components/Post"
+import { usePosts } from "../../Contexts/PostsProvider"
 
 const PageFeed = () => {
+    const { allPosts: { feedPosts } } = usePosts()
+
     return (
         <>
             <Nav />
@@ -12,7 +15,8 @@ const PageFeed = () => {
                 <SideBar />
                 <Flex w={"25rem"} direction={"column"} gap={"3rem"}>
                     <AddPost />
-                    <Post />
+                    {feedPosts.map(eachFeedPost => <Post key={eachFeedPost._id} {...eachFeedPost} />)}
+
                 </Flex>
             </Flex>
 
