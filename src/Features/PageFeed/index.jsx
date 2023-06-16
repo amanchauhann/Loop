@@ -32,7 +32,7 @@ const PageFeed = () => {
                             value={"latest"}
                             onClick={handle_select}
                         >
-                            <i class="fa-solid fa-clock fa-lg"></i>
+                            <i className="fa-solid fa-clock fa-lg"></i>
                             Latest
                         </Button>
                         <Button
@@ -45,7 +45,7 @@ const PageFeed = () => {
                             value={"trending"}
                             onClick={handle_select}
                         >
-                            <i class="fa-solid fa-fire fa-lg"></i>
+                            <i className="fa-solid fa-fire fa-lg"></i>
                             Trending
                         </Button>
                     </Flex>
