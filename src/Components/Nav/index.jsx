@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./main.css"
+import { Link } from "react-router-dom";
 
 const Nav = () => {
     const [search_value, setSearch_value] = useState("");
@@ -9,6 +10,9 @@ const Nav = () => {
     return (
         <nav className="navigation">
             <div className="nav_logo">Loop</div>
+            <Link to="/login">
+                Login
+            </Link>
             <div className="input_container">
                 <input
                     className="search_bar"

@@ -6,3 +6,7 @@ export const POSTS = {
 export const USERS = {
     INITIALISE: "INITIALISE_USERS"
 }
+
+export const AUTH = {
+    LOGIN: "LOGIN"
+}
