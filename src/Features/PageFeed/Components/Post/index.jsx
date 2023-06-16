@@ -5,7 +5,7 @@ import { divider_border } from "../../../../Styles/Global"
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu"
 import { useUsers } from "../../../../Contexts/UsersProvider"
 
-const Post = ({ username, content, likes }) => {
+const Post = ({ username, content, likes, updatedAt }) => {
     const { allUsers: { users } } = useUsers()
     const { firstName, lastName, displayImg } = users?.find(eachUser => eachUser.username === username)
     return (
@@ -80,6 +80,7 @@ const Post = ({ username, content, likes }) => {
                         <i className="fa-regular fa-bookmark fa-lg"></i>
                     </div>
                 </Flex>
+                <p>{updatedAt.substring(0, 10).split('-').reverse().join('-')}</p>
             </Flex>
         </div>
     )
