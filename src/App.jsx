@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom'
 import Mockman from "mockman-js"
 import Explore from './Features/Explore'
 import Login from './Features/Auth/Login/Login'
+import Private from './Features/Private'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +15,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<PageFeed />} />
+        <Route path="/" element={<Private><PageFeed /></Private>} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mockman" element={<Mockman />} />

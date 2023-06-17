@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
         logged: false
     }
     const [userData, authDispacth] = useReducer(authReducer, initial_credentials)
-    console.log(userData)
 
     const login = async (credential) => {
         try {
