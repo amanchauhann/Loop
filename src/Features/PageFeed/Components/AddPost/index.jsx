@@ -4,9 +4,11 @@ import { Flex } from "@chakra-ui/layout";
 import { EmojiContainer } from "../EmojiContainer";
 import { useState } from "react";
 import { divider_border } from "../../../../Styles/Global";
+import { useAuth } from "../../../../Contexts/AuthProvider";
 
 const AddPost = () => {
     const [content, set_content] = useState("")
+    const { userData: { user: { user_details: { displayImg } } } } = useAuth()
     return (
         // <div className="add_post_container">
         <Flex style={divider_border} p={"1rem"} h={"fit-content"} direction={"column"} gap={"1rem"}>
@@ -14,8 +16,8 @@ const AddPost = () => {
                 <Image
                     borderRadius='full'
                     boxSize='45px'
-                    src='https://bit.ly/dan-abramov'
-                    alt='Dan Abramov'
+                    src={displayImg}
+                    alt={displayImg}
                 />
                 <input value={content} onChange={(e) => set_content(e.target.value)} className="add_post_input" type="text" />
             </Flex>
