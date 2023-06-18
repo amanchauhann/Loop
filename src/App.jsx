@@ -8,6 +8,9 @@ import Mockman from "mockman-js"
 import Explore from './Features/Explore'
 import Login from './Features/Auth/Login/Login'
 import Private from './Features/Private'
+import { useAuth } from './Contexts/AuthProvider'
+import { usePosts } from './Contexts/PostsProvider'
+import Liked from './Features/Liked'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Private><PageFeed /></Private>} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/liked" element={<Liked />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mockman" element={<Mockman />} />
       </Routes>

@@ -33,7 +33,7 @@ export const PostsProvider = ({ children }) => {
     }, [user_details])
 
     return (
-        <PostsContext.Provider value={{ allPosts }}>
+        <PostsContext.Provider value={{ allPosts, postsDispatch }}>
             {children}
         </PostsContext.Provider>
     )
