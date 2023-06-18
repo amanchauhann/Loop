@@ -23,7 +23,7 @@ export const PostsProvider = ({ children }) => {
                 if (status === 200) {
                     postsDispatch({ type: "INITIALISE_POSTS", payload: data.posts })
                     // NEED TO CHANGE LATER TO AUTH USER RATHER THAN HARD CODED.
-                    postsDispatch({ type: "ADD_TO_FEED", payload: (data.posts).filter(eachPost => eachPost.username === user_details.username) })
+                    // postsDispatch({ type: "ADD_TO_FEED", payload: (data.posts).filter(eachPost => eachPost.username === user_details.username) })
                 }
             } catch (e) {
                 console.error("from PostsProvider", e)

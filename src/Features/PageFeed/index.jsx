@@ -6,11 +6,17 @@ import Post from "./Components/Post"
 import { usePosts } from "../../Contexts/PostsProvider"
 import PostsLayout from "../../Layout/PostsLayout"
 import { Button } from "@chakra-ui/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useAuth } from "../../Contexts/AuthProvider"
 
 const PageFeed = () => {
-    const { allPosts: { feedPosts } } = usePosts()
+    const { postsDispatch, allPosts: { posts, feedPosts } } = usePosts()
+    const { userData: { user: { user_details, encoded_token } } } = useAuth()
     const [selected_button, set_selected_button] = useState(null);
+
+    useEffect(() => {
+        postsDispatch({ type: "ADD_TO_FEED", payload: (posts).filter(eachPost => eachPost.username === user_details.username) })
+    }, [posts])
 
     const handle_select = (e) => set_selected_button(e.target.value)
     return (
