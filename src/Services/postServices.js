@@ -27,3 +27,35 @@ export const getDislikePostService = (post_id, encoded_token) => {
         }
     )
 }
+
+export const getAddBookmarkService = (post_id, encoded_token) => {
+    return axios.post(
+        `/api/users/bookmark/${post_id}`,
+        {},
+        {
+            headers: {
+                authorization: encoded_token
+            },
+        }
+    )
+}
+
+export const getRemoveBookmarkService = (post_id, encoded_token) => {
+    return axios.post(
+        `/api/users/remove-bookmark/${post_id}`,
+        {},
+        {
+            headers: {
+                authorization: encoded_token
+            },
+        }
+    )
+}
+
+export const getBookmarkService = (encoded_token) => {
+    return axios.get("/api/users/bookmark", {}, {
+        headers: {
+            authorization: encoded_token
+        },
+    })
+}

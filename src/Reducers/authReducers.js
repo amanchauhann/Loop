@@ -11,6 +11,14 @@ export const authReducer = (state, { type, payload }) => {
                 },
                 logged: true
             }
+        case AUTH.SET_BOOKMARKS:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    user_details: { ...state.user.user_details, bookmarks: payload },
+                },
+            }
         default:
             return state
     }

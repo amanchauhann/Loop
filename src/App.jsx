@@ -11,6 +11,7 @@ import Private from './Features/Private'
 import { useAuth } from './Contexts/AuthProvider'
 import { usePosts } from './Contexts/PostsProvider'
 import Liked from './Features/Liked'
+import Bookmarks from './Features/Bookmarks'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Private><PageFeed /></Private>} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/bookmarks" element={<Bookmarks />} />
         <Route path="/liked" element={<Liked />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mockman" element={<Mockman />} />

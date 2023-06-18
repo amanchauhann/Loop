@@ -5,13 +5,13 @@ import { divider_border } from "../../../../Styles/Global"
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu"
 import { useUsers } from "../../../../Contexts/UsersProvider"
 import { useAuth } from "../../../../Contexts/AuthProvider"
-import { getDislikePostService, getLikePostService } from "../../../../Services/postServices"
+import { getAddBookmarkService, getDislikePostService, getLikePostService, getRemoveBookmarkService } from "../../../../Services/postServices"
 import { usePosts } from "../../../../Contexts/PostsProvider"
-import { POSTS } from "../../../../Common/reducerTypes"
+import { AUTH, POSTS } from "../../../../Common/reducerTypes"
 
 const Post = ({ _id, username, content, likes, updatedAt }) => {
     const { allUsers: { users } } = useUsers()
-    const { userData: { user: { user_details, encoded_token } } } = useAuth()
+    const { authDispacth, userData: { user: { user_details, encoded_token } } } = useAuth()
     const { postsDispatch, allPosts: { posts } } = usePosts()
     const { firstName, lastName, displayImg } = users?.find(eachUser => eachUser.username === username)
 
@@ -23,9 +23,22 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
             }
 
         } catch (e) {
-            console.error("from Post", e)
+            console.error("from like_Post", e)
         }
     }
+
+    const bookmark_handler = async (service, post_id, encoded_token) => {
+        try {
+            const { data, status } = await service(post_id, encoded_token)
+            // console.log("dataaa", data)
+            if (status === 200) {
+                authDispacth({ type: AUTH.SET_BOOKMARKS, payload: data.bookmarks })
+            }
+        } catch (e) {
+            console.error("from bookmark_Post", e)
+        }
+    }
+    // console.log("useer detailss,>>", user_details)
     return (
         <div>
             <Flex style={divider_border} p={"1rem"} gap={"1rem"} direction={"column"} className="bg_sec">
@@ -100,9 +113,16 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
                     <div className="post_icon">
                         <i className="fa-regular fa-message fa-lg"></i>
                     </div>
-                    <div className="post_icon">
-                        <i className="fa-regular fa-bookmark fa-lg"></i>
-                    </div>
+                    {user_details.bookmarks.find(each_bookmark_ID => each_bookmark_ID === _id) ?
+                        <div className="post_icon" onClick={() => bookmark_handler(getRemoveBookmarkService, _id, encoded_token)}>
+                            <i className="fa-sharp fa-solid fa-bookmark fa-lg"></i>
+                        </div>
+                        :
+                        <div className="post_icon" onClick={() => bookmark_handler(getAddBookmarkService, _id, encoded_token)}>
+                            <i className="fa-regular fa-bookmark fa-lg"></i>
+                        </div>
+                    }
+
                 </Flex>
                 <p>{updatedAt.substring(0, 10).split('-').reverse().join('-')}</p>
             </Flex>

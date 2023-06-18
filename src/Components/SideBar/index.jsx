@@ -17,7 +17,10 @@ const SideBar = () => {
                     </Link>
 
                 </div>
-                <div className="sidebar_item" align="center"><i className="fa-solid fa-bookmark fa-xl"></i></div>
+                <Link to="/bookmarks">
+                    <div className="sidebar_item" align="center"><i className="fa-solid fa-bookmark fa-xl"></i></div>
+                </Link>
+
                 <Link to={"/liked"}>
                     <div className="sidebar_item" align="center"><i className="fa-solid fa-heart fa-xl"></i></div>
                 </Link>
