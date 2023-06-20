@@ -23,7 +23,7 @@ const Bookmarks = () => {
     // }, [])
 
     useEffect(() => {
-        set_bookmarked_posts(posts.filter(({ _id }) => user_details.bookmarks.includes(_id)))
+        set_bookmarked_posts(posts.filter(({ _id }) => user_details?.bookmarks?.includes(_id)))
     }, [posts])
 
 
