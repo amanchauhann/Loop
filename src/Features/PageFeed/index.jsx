@@ -8,11 +8,14 @@ import PostsLayout from "../../Layout/PostsLayout"
 import { Button } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { useAuth } from "../../Contexts/AuthProvider"
+import SuggestionBar from "../../Components/SuggestionBar"
 
 const PageFeed = () => {
     const { postsDispatch, allPosts: { posts, feedPosts } } = usePosts()
     const { userData: { user: { user_details, encoded_token } } } = useAuth()
     const [selected_button, set_selected_button] = useState(null);
+
+    console.log("aman", user_details)
 
     useEffect(() => {
         postsDispatch({ type: "ADD_TO_FEED", payload: (posts).filter(eachPost => eachPost.username === user_details.username) })
@@ -57,6 +60,7 @@ const PageFeed = () => {
                     </Flex>
                     <PostsLayout children={feedPosts.map(eachFeedPost => <Post key={eachFeedPost._id} {...eachFeedPost} />)} />
                 </Flex>
+                <SuggestionBar />
             </Flex>
 
         </>

@@ -4,7 +4,8 @@ export const POSTS = {
 }
 
 export const USERS = {
-    INITIALISE: "INITIALISE_USERS"
+    INITIALISE: "INITIALISE_USERS",
+    FOLLOW: "FOLLOW"
 }
 
 export const AUTH = {

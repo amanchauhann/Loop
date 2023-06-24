@@ -24,7 +24,7 @@ export const UsersProvider = ({ children }) => {
         fetchUsers()
     }, [])
     return (
-        <UsersContext.Provider value={{ allUsers }}>
+        <UsersContext.Provider value={{ allUsers, usersDispatch }}>
             {children}
         </UsersContext.Provider>
     )

@@ -1,4 +1,4 @@
-import { AUTH } from "../Common/reducerTypes";
+import { AUTH, USERS } from "../Common/reducerTypes";
 
 export const authReducer = (state, { type, payload }) => {
     switch (type) {
@@ -17,6 +17,14 @@ export const authReducer = (state, { type, payload }) => {
                 user: {
                     ...state.user,
                     user_details: { ...state.user.user_details, bookmarks: payload },
+                },
+            }
+        case USERS.FOLLOW:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    user_details: payload,
                 },
             }
         default:
