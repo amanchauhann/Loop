@@ -14,6 +14,7 @@ const Chip = ({ _id, displayImg, firstName, lastName, username }) => {
                 const { data: { user, followUser }, status } = await service(_id, encoded_token)
                 if (status === 200) {
                     authDispacth({ type: USERS.FOLLOW, payload: user })
+                    usersDispatch({ type: USERS.FOLLOW, payload: followUser })
                     // console.log("follow>>", a)
                 }
             } catch (e) {
@@ -22,12 +23,12 @@ const Chip = ({ _id, displayImg, firstName, lastName, username }) => {
         }
         follow_user()
     }
-    // console.log("find", user_details.following.find(each_following => each_following._id === _id))
+    console.log("all", users)
     return (
         <>
             <Flex align={"center"} gap={3} justify={"space-between"}>
                 <Flex gap={"1rem"}>
-                    <Avatar name='Segun Adebayo' src={displayImg} />
+                    <Avatar name={`${firstName} ${lastName}`} src={displayImg} />
                     <Box>
                         <Text fontSize='sm'>{firstName} {lastName}</Text>
                         <Text fontSize={"xs"}>{username}</Text>
