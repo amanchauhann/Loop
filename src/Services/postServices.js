@@ -8,6 +8,16 @@ export const getSpecificUserPostsService = (username) => {
     return axios.get(`/api/posts/user/${username}`)
 }
 
+export const getDeletePostService = (post_id, encoded_token) => {
+    return axios.delete(
+        `/api/posts/${post_id}`,
+        {
+            headers: {
+                authorization: encoded_token
+            },
+        }
+    )
+}
 export const getLikePostService = (post_id, encoded_token) => {
     return axios.post(
         `/api/posts/like/${post_id}`,

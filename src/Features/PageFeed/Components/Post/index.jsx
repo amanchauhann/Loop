@@ -5,16 +5,37 @@ import { divider_border } from "../../../../Styles/Global"
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu"
 import { useUsers } from "../../../../Contexts/UsersProvider"
 import { useAuth } from "../../../../Contexts/AuthProvider"
-import { getAddBookmarkService, getDislikePostService, getLikePostService, getRemoveBookmarkService } from "../../../../Services/postServices"
+import { getAddBookmarkService, getDeletePostService, getDislikePostService, getLikePostService, getRemoveBookmarkService } from "../../../../Services/postServices"
 import { usePosts } from "../../../../Contexts/PostsProvider"
 import { AUTH, POSTS } from "../../../../Common/reducerTypes"
 import { Link } from "react-router-dom"
+import { useEffect } from "react"
+import { useState } from "react"
 
 const Post = ({ _id, username, content, likes, updatedAt }) => {
     const { allUsers: { users } } = useUsers()
     const { authDispacth, userData: { user: { user_details, encoded_token } } } = useAuth()
     const { postsDispatch, allPosts: { posts } } = usePosts()
-    const { firstName, lastName, displayImg, _id: user_id } = users?.find(eachUser => eachUser.username === username)
+    const { firstName, lastName, displayImg, _id: userID } = users?.find(eachUser => eachUser.username === username)
+    const [is_logged_user, set_is_logged_user] = useState(false)
+    console.log("to be delete", _id)
+
+    console.log("encoded", encoded_token)
+    const delete_handler = (id, encodedToken) => {
+        // console.log("aaa", id)
+        const delete_post = async () => {
+            try {
+                const { data, status } = await getDeletePostService(id, encodedToken)
+                if (status === 201) {
+                    console.log("deltion", data)
+                    postsDispatch({ type: "INITIALISE_POSTS", payload: data.posts })
+                }
+            } catch (e) {
+                console.error("from post_deletehandler", e)
+            }
+        }
+        delete_post()
+    }
 
     const like_handler = async (service, post_id, encoded_token) => {
         try {
@@ -39,12 +60,16 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
             console.error("from bookmark_Post", e)
         }
     }
+
+    useEffect(() => {
+        set_is_logged_user(user_details._id === userID ? true : false)
+    }, [users])
     // console.log("useer detailss,>>", user_details)
     return (
         <div>
             <Flex style={divider_border} p={"1rem"} gap={"1rem"} direction={"column"} className="bg_sec">
                 <Flex justify={"space-between"}>
-                    <Link to={`/profile/${user_id}`}>
+                    <Link to={`/profile/${userID}`}>
                         <Flex gap={"10px"}>
                             <Image
                                 borderRadius='full'
@@ -60,7 +85,7 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
                     </Link>
 
                     {/* ---Ellipsis--- */}
-                    <Menu>
+                    {is_logged_user && <Menu>
                         <MenuButton
                             _hover={{
                                 border: "none",
@@ -85,6 +110,7 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
                                 Edit
                             </MenuItem>
                             <MenuItem
+                                onClick={() => delete_handler(_id, encoded_token)}
                                 _focus={{
                                     outline: "none",
                                 }}
@@ -97,7 +123,7 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
                                 Delete
                             </MenuItem>
                         </MenuList>
-                    </Menu>
+                    </Menu>}
                 </Flex>
                 {/* <Divider /> */}
                 <Text fontSize={"sm"}>
