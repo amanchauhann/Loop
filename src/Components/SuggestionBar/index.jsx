@@ -17,7 +17,7 @@ const SuggestionBar = () => {
     return (
         <Flex direction={"column"} gap={"1rem"} border={"1px solid currentcolor"} p={"1rem"} h={"fit-content"} display={shouldHide ? 'none' : 'flex'}>
             <Heading size={"sm"}>Suggestions for you</Heading>
-            {users_without_currentUser.map(each_user => <Chip {...each_user} />)}
+            {users_without_currentUser.map(each_user => <Chip key={each_user._id} {...each_user} />)}
 
         </Flex>
     )

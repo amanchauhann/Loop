@@ -21,7 +21,6 @@ const AddPost = () => {
                 if (status === 201)
                     postsDispatch({ type: POSTS.INITIALISE, payload: data.posts })
                 set_content("")
-                console.log("add_post", res)
             } catch (e) {
                 console.error("from AddPost_handler", e)
             }

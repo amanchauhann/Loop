@@ -5,7 +5,6 @@ export const getUsersService = () => {
 }
 
 export const getSpecificUserService = (user_id) => {
-    console.log("from services", user_id)
     return axios.get(`/api/users/${user_id}`)
 }
 

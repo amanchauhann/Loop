@@ -7,7 +7,6 @@ import { POSTS } from "../../../../../Common/reducerTypes"
 const EditModal = ({ isOpen, onClose, content, _id, encoded_token }) => {
     const { postsDispatch, allPosts: { posts, feedPosts } } = usePosts()
     const [edit_content, set_edit_content] = useState(`${content}`)
-    console.log("checksingssaaa", _id, content)
 
     const edit_value_handler = (e) => {
         set_edit_content(e.target.value)
@@ -19,7 +18,6 @@ const EditModal = ({ isOpen, onClose, content, _id, encoded_token }) => {
                 if (status === 201) {
                     postsDispatch({ type: POSTS.INITIALISE, payload: posts })
                     onClose()
-                    console.log("edit", res)
                 }
 
             } catch (e) {
@@ -28,7 +26,6 @@ const EditModal = ({ isOpen, onClose, content, _id, encoded_token }) => {
         }
         edit_post()
     }
-    // console.log("edddit", edit_content)
 
     return (
         <>

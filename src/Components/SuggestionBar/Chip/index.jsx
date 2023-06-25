@@ -17,7 +17,6 @@ const Chip = ({ _id, displayImg, firstName, lastName, username }) => {
                 if (status === 200) {
                     authDispacth({ type: USERS.FOLLOW, payload: user })
                     usersDispatch({ type: USERS.FOLLOW, payload: followUser })
-                    // console.log("follow>>", a)
                 }
             } catch (e) {
                 console.error("from follow_chip", e)
@@ -25,7 +24,7 @@ const Chip = ({ _id, displayImg, firstName, lastName, username }) => {
         }
         follow_user()
     }
-    console.log("all", users)
+
     return (
         <>
             <Flex align={"center"} gap={3} justify={"space-between"}>

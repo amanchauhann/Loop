@@ -15,8 +15,6 @@ const PageFeed = () => {
     const { userData: { user: { user_details, encoded_token } } } = useAuth()
     const [selected_button, set_selected_button] = useState(null);
 
-    console.log("aman", user_details)
-
     useEffect(() => {
         postsDispatch({ type: "ADD_TO_FEED", payload: (posts).filter(eachPost => eachPost.username === user_details.username) })
     }, [posts])

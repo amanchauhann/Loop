@@ -20,16 +20,12 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
     const { postsDispatch, allPosts: { posts } } = usePosts()
     const { firstName, lastName, displayImg, _id: userID } = users?.find(eachUser => eachUser.username === username)
     const [is_logged_user, set_is_logged_user] = useState(false)
-    console.log("checkinggg>>>>>", _id, content)
 
-    console.log("encoded", encoded_token)
     const delete_handler = (id, encodedToken) => {
-        // console.log("aaa", id)
         const delete_post = async () => {
             try {
                 const { data, status } = await getDeletePostService(id, encodedToken)
                 if (status === 201) {
-                    console.log("deltion", data)
                     postsDispatch({ type: "INITIALISE_POSTS", payload: data.posts })
                 }
             } catch (e) {
@@ -54,7 +50,6 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
     const bookmark_handler = async (service, post_id, encoded_token) => {
         try {
             const { data, status } = await service(post_id, encoded_token)
-            // console.log("dataaa", data)
             if (status === 200) {
                 authDispacth({ type: AUTH.SET_BOOKMARKS, payload: data.bookmarks })
             }
@@ -66,7 +61,6 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
     useEffect(() => {
         set_is_logged_user(user_details._id === userID ? true : false)
     }, [users])
-    // console.log("useer detailss,>>", user_details)
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
