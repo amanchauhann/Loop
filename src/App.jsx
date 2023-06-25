@@ -22,12 +22,12 @@ function App() {
       <Routes>
         <Route element={<Private />}>
           <Route path="/" element={<PageFeed />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
+          <Route path="/liked" element={<Liked />} />
+          <Route path="profile/:user_id" element={<UserProfile />} />
         </Route>
 
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/bookmarks" element={<Bookmarks />} />
-        <Route path="/liked" element={<Liked />} />
-        <Route path="profile/:user_id" element={<UserProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mockman" element={<Mockman />} />
       </Routes>
