@@ -9,11 +9,13 @@ import { getSpecificUserPostsService } from "../../Services/postServices"
 import Post from "../PageFeed/Components/Post"
 import PostsLayout from "../../Layout/PostsLayout"
 import { usePosts } from "../../Contexts/PostsProvider"
+import { useUsers } from "../../Contexts/UsersProvider"
 
 const UserProfile = () => {
     const { user_id } = useParams()
     const { userData: { user: { user_details, encoded_token } }, authDispacth } = useAuth()
     const { postsDispatch, allPosts: { posts, feedPosts } } = usePosts()
+    const { allUsers: { users }, usersDispatch } = useUsers()
     const [user_profile, set_user_profile] = useState({})
     const [user_posts, set_user_posts] = useState([])
     const [is_logged_user, set_is_logged_user] = useState(false)
