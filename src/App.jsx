@@ -12,6 +12,7 @@ import { useAuth } from './Contexts/AuthProvider'
 import { usePosts } from './Contexts/PostsProvider'
 import Liked from './Features/Liked'
 import Bookmarks from './Features/Bookmarks'
+import UserProfile from './Features/UserProfile'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
         <Route path="/liked" element={<Liked />} />
+        <Route path="profile/:user_id" element={<UserProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mockman" element={<Mockman />} />
       </Routes>

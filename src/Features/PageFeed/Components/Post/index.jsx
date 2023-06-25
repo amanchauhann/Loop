@@ -8,12 +8,13 @@ import { useAuth } from "../../../../Contexts/AuthProvider"
 import { getAddBookmarkService, getDislikePostService, getLikePostService, getRemoveBookmarkService } from "../../../../Services/postServices"
 import { usePosts } from "../../../../Contexts/PostsProvider"
 import { AUTH, POSTS } from "../../../../Common/reducerTypes"
+import { Link } from "react-router-dom"
 
 const Post = ({ _id, username, content, likes, updatedAt }) => {
     const { allUsers: { users } } = useUsers()
     const { authDispacth, userData: { user: { user_details, encoded_token } } } = useAuth()
     const { postsDispatch, allPosts: { posts } } = usePosts()
-    const { firstName, lastName, displayImg } = users?.find(eachUser => eachUser.username === username)
+    const { firstName, lastName, displayImg, _id: user_id } = users?.find(eachUser => eachUser.username === username)
 
     const like_handler = async (service, post_id, encoded_token) => {
         try {
@@ -43,18 +44,21 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
         <div>
             <Flex style={divider_border} p={"1rem"} gap={"1rem"} direction={"column"} className="bg_sec">
                 <Flex justify={"space-between"}>
-                    <Flex gap={"10px"}>
-                        <Image
-                            borderRadius='full'
-                            boxSize='45px'
-                            src={displayImg}
-                            alt={`portrait of ${firstName} ${lastName}`}
-                        />
-                        <Flex direction={"column"}>
-                            <Text fontSize='md'>{`${firstName} ${lastName}`}</Text>
-                            <Text fontSize="xs">{username}</Text>
+                    <Link to={`/profile/${user_id}`}>
+                        <Flex gap={"10px"}>
+                            <Image
+                                borderRadius='full'
+                                boxSize='45px'
+                                src={displayImg}
+                                alt={`portrait of ${firstName} ${lastName}`}
+                            />
+                            <Flex direction={"column"}>
+                                <Text fontSize='md'>{`${firstName} ${lastName}`}</Text>
+                                <Text fontSize="xs">{username}</Text>
+                            </Flex>
                         </Flex>
-                    </Flex>
+                    </Link>
+
                     {/* ---Ellipsis--- */}
                     <Menu>
                         <MenuButton
