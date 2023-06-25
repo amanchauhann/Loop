@@ -10,5 +10,6 @@ export const USERS = {
 
 export const AUTH = {
     LOGIN: "LOGIN",
-    SET_BOOKMARKS: "SET_BOOKMARKS"
+    SET_BOOKMARKS: "SET_BOOKMARKS",
+    LOGOUT: "LOGOUT"
 }

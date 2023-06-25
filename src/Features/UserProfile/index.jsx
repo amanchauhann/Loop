@@ -2,9 +2,9 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { getFollowService, getSpecificUserService, getUnfollowService } from "../../Services/userServices"
 import { useState } from "react"
-import { Avatar, Box, Button, Flex, Link, Text } from "@chakra-ui/react"
+import { Avatar, Box, Button, Flex, Link, Text, Tooltip } from "@chakra-ui/react"
 import { useAuth } from "../../Contexts/AuthProvider"
-import { USERS } from "../../Common/reducerTypes"
+import { AUTH, USERS } from "../../Common/reducerTypes"
 import { getSpecificUserPostsService } from "../../Services/postServices"
 import Post from "../PageFeed/Components/Post"
 import PostsLayout from "../../Layout/PostsLayout"
@@ -63,6 +63,9 @@ const UserProfile = () => {
         fetchPosts()
     }, [user_profile, posts])
 
+    const logout_handler = () => {
+        authDispacth({ type: AUTH.LOGOUT })
+    }
     return (
         <>
             <Flex p={"10px"} direction={"column"} gap={10} maxW={"30rem"}>
@@ -74,38 +77,45 @@ const UserProfile = () => {
                                 <Text fontSize='md'>{firstName} {lastName}</Text>
                                 <Text fontSize={"xs"}>@{username}</Text>
                             </Box>
-                            {is_logged_user ?
-                                <Button bg={"transparent"}
-                                    color={"rgb(246, 226, 194)"}
-                                    border={"1px solid currentcolor"}
-                                    _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)", border: "1px solid currentcolor" }}
-                                >
-                                    Edit
-                                </Button>
-                                :
-                                user_details?.following?.find(each_following => each_following._id === _id) ?
-                                    <Button
-                                        bg={"transparent"}
+                            <Flex align={"center"} gap={5} direction={"column"}>
+                                {is_logged_user ?
+                                    <Button bg={"transparent"}
                                         color={"rgb(246, 226, 194)"}
                                         border={"1px solid currentcolor"}
-                                        _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)" }}
-                                        _focus={{ outline: 'none' }}
-                                        onClick={() => follow_unfollow_handler(getUnfollowService, _id, encoded_token)}
+                                        _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)", border: "1px solid currentcolor" }}
                                     >
-                                        Unfollow</Button>
-                                    :
-                                    <Button
-                                        bg={"rgb(246, 226, 194)"}
-                                        color={"black"}
-                                        border={"1px solid currentcolor"}
-                                        _hover={{ color: 'currentcolor', bg: "transparent", border: "1px solid currentcolor" }}
-                                        _focus={{ outline: 'none' }}
-                                        transition={"0.7s"}
-                                        onClick={() => follow_unfollow_handler(getFollowService, _id, encoded_token)}
-                                    >
-                                        Follow
+                                        Edit
                                     </Button>
-                            }
+                                    :
+                                    user_details?.following?.find(each_following => each_following._id === _id) ?
+                                        <Button
+                                            bg={"transparent"}
+                                            color={"rgb(246, 226, 194)"}
+                                            border={"1px solid currentcolor"}
+                                            _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)" }}
+                                            _focus={{ outline: 'none' }}
+                                            onClick={() => follow_unfollow_handler(getUnfollowService, _id, encoded_token)}
+                                        >
+                                            Unfollow</Button>
+                                        :
+                                        <Button
+                                            bg={"rgb(246, 226, 194)"}
+                                            color={"black"}
+                                            border={"1px solid currentcolor"}
+                                            _hover={{ color: 'currentcolor', bg: "transparent", border: "1px solid currentcolor" }}
+                                            _focus={{ outline: 'none' }}
+                                            transition={"0.7s"}
+                                            onClick={() => follow_unfollow_handler(getFollowService, _id, encoded_token)}
+                                        >
+                                            Follow
+                                        </Button>
+                                }
+                                <Tooltip m={3} label="Logout">
+                                    <i onClick={logout_handler} className="fa-solid fa-right-from-bracket fa-lg pointer_cursor"></i>
+                                </Tooltip>
+
+                            </Flex>
+
 
                         </Flex>
                         <Text>{bio}</Text>

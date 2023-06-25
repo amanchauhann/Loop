@@ -50,3 +50,7 @@
 .bg_sec {
   background: var(--secondary-color);
 }
+
+.pointer_cursor {
+  cursor: pointer;
+}

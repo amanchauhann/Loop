@@ -11,6 +11,15 @@ export const authReducer = (state, { type, payload }) => {
                 },
                 logged: true
             }
+        case AUTH.LOGOUT:
+            return {
+                ...state,
+                user: {
+                    user_details: {},
+                    encoded_token: ""
+                },
+                logged: false
+            }
         case AUTH.SET_BOOKMARKS:
             return {
                 ...state,
