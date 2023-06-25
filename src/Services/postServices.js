@@ -8,6 +8,21 @@ export const getSpecificUserPostsService = (username) => {
     return axios.get(`/api/posts/user/${username}`)
 }
 
+export const getAddPostService = (post, encoded_token) => {
+    return axios.post("/api/posts",
+        {
+            postData: {
+                content: post
+            }
+        },
+        {
+            headers: {
+                authorization: encoded_token
+            },
+        }
+    )
+}
+
 export const getDeletePostService = (post_id, encoded_token) => {
     return axios.delete(
         `/api/posts/${post_id}`,

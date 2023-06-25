@@ -5,10 +5,29 @@ import { EmojiContainer } from "../EmojiContainer";
 import { useState } from "react";
 import { divider_border } from "../../../../Styles/Global";
 import { useAuth } from "../../../../Contexts/AuthProvider";
+import { getAddPostService } from "../../../../Services/postServices";
+import { usePosts } from "../../../../Contexts/PostsProvider";
+import { POSTS } from "../../../../Common/reducerTypes";
 
 const AddPost = () => {
     const [content, set_content] = useState("")
-    const { userData: { user: { user_details: { displayImg } } } } = useAuth()
+    const { userData: { user: { user_details: { displayImg }, encoded_token } } } = useAuth()
+    const { postsDispatch, allPosts: { posts, feedPosts } } = usePosts()
+
+    const add_post_handler = () => {
+        const add_post = async () => {
+            try {
+                const { data, status } = await getAddPostService(content, encoded_token)
+                if (status === 201)
+                    postsDispatch({ type: POSTS.INITIALISE, payload: data.posts })
+                set_content("")
+                console.log("add_post", res)
+            } catch (e) {
+                console.error("from AddPost_handler", e)
+            }
+        }
+        add_post()
+    }
     return (
         // <div className="add_post_container">
         <Flex style={divider_border} p={"1rem"} h={"fit-content"} direction={"column"} gap={"1rem"}>
@@ -26,7 +45,7 @@ const AddPost = () => {
                     <i className="fa-regular fa-image fa-lg"></i>
                     <EmojiContainer set_content={set_content} />
                 </Flex>
-                <button className="post_btn">POST</button>
+                <button className="post_btn" onClick={add_post_handler} disabled={content.length ? false : true}>POST</button>
             </Flex>
         </Flex>
         // </div>
