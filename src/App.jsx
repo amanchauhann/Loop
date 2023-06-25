@@ -20,7 +20,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Private><PageFeed /></Private>} />
+        <Route element={<Private />}>
+          <Route path="/" element={<PageFeed />} />
+        </Route>
+
         <Route path="/explore" element={<Explore />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
         <Route path="/liked" element={<Liked />} />
