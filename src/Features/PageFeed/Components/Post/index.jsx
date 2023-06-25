@@ -11,6 +11,8 @@ import { AUTH, POSTS } from "../../../../Common/reducerTypes"
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 import { useState } from "react"
+import { useDisclosure } from "@chakra-ui/react"
+import EditModal from "./EditModal"
 
 const Post = ({ _id, username, content, likes, updatedAt }) => {
     const { allUsers: { users } } = useUsers()
@@ -18,7 +20,7 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
     const { postsDispatch, allPosts: { posts } } = usePosts()
     const { firstName, lastName, displayImg, _id: userID } = users?.find(eachUser => eachUser.username === username)
     const [is_logged_user, set_is_logged_user] = useState(false)
-    console.log("to be delete", _id)
+    console.log("checkinggg>>>>>", _id, content)
 
     console.log("encoded", encoded_token)
     const delete_handler = (id, encodedToken) => {
@@ -65,6 +67,9 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
         set_is_logged_user(user_details._id === userID ? true : false)
     }, [users])
     // console.log("useer detailss,>>", user_details)
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     return (
         <div>
             <Flex style={divider_border} p={"1rem"} gap={"1rem"} direction={"column"} className="bg_sec">
@@ -100,6 +105,7 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
                         </MenuButton>
                         <MenuList bg={"rgb(46, 48, 52)"}>
                             <MenuItem
+                                onClick={onOpen}
                                 _focus={{
                                     outline: "none",
                                 }}
@@ -152,10 +158,10 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
                             <i className="fa-regular fa-bookmark fa-lg"></i>
                         </div>
                     }
-
                 </Flex>
                 <p>{updatedAt.substring(0, 10).split('-').reverse().join('-')}</p>
             </Flex>
+            <EditModal isOpen={isOpen} onClose={onClose} content={content} _id={_id} encoded_token={encoded_token} />
         </div>
     )
 }

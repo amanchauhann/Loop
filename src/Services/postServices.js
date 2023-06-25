@@ -23,6 +23,22 @@ export const getAddPostService = (post, encoded_token) => {
     )
 }
 
+export const getEditPostService = (edited_post, post_id, encoded_token) => {
+    return axios.post(
+        `/api/posts/edit/${post_id}`,
+        {
+            postData: {
+                content: edited_post
+            },
+        },
+        {
+            headers: {
+                authorization: encoded_token
+            },
+        }
+    )
+}
+
 export const getDeletePostService = (post_id, encoded_token) => {
     return axios.delete(
         `/api/posts/${post_id}`,
