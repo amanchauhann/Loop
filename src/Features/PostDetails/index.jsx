@@ -39,7 +39,7 @@ const PostDetails = () => {
                     <Post {...user_post} />
                     <AddComment user_post={user_post} />
                     <Flex direction={"column"} gap={5}>
-                        {user_post.comments.map(each_comment => <Comment {...each_comment} />)}
+                        {user_post.comments.map(each_comment => <Comment key={each_comment._id} {...each_comment} />)}
                     </Flex>
 
 
