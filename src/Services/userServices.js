@@ -4,8 +4,8 @@ export const getUsersService = () => {
     return axios.get("/api/users");
 }
 
-export const getSpecificUserService = (user_id) => {
-    return axios.get(`/api/users/${user_id}`)
+export const getSpecificUserService = (user_name) => {
+    return axios.get(`/api/users/${user_name}`)
 }
 
 export const getUserEditService = (user_data, encoded_token) => {

@@ -13,13 +13,29 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { useDisclosure } from "@chakra-ui/react"
 import EditModal from "./EditModal"
+import { getSpecificUserService } from "../../../../Services/userServices"
 
 const Post = ({ _id, username, content, likes, createdAt }) => {
     const { allUsers: { users } } = useUsers()
     const { authDispacth, userData: { user: { user_details, encoded_token } } } = useAuth()
     const { postsDispatch, allPosts: { posts } } = usePosts()
-    const { firstName, lastName, displayImg, _id: userID } = username === user_details.username ? user_details : users?.find(eachUser => eachUser.username === username)
+    // const { firstName, lastName, displayImg, _id: userID } = username === user_details.username ? user_details : users?.find(eachUser => eachUser.username === username)
     const [is_logged_user, set_is_logged_user] = useState(false)
+    const [current_user, set_current_user] = useState({})
+
+    useEffect(() => {
+        const get_this_user = async () => {
+            try {
+                const { data: { user }, status } = await getSpecificUserService(username)
+                if (status === 200) {
+                    set_current_user(user)
+                }
+            } catch (e) {
+                console.error("from posts_getUser", e)
+            }
+        }
+        get_this_user()
+    }, [])
 
     const delete_handler = (id, encodedToken) => {
         const delete_post = async () => {
@@ -59,7 +75,7 @@ const Post = ({ _id, username, content, likes, createdAt }) => {
     }
 
     useEffect(() => {
-        set_is_logged_user(user_details._id === userID ? true : false)
+        set_is_logged_user(user_details._id === current_user?._id ? true : false)
     }, [users])
 
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -73,11 +89,11 @@ const Post = ({ _id, username, content, likes, createdAt }) => {
                             <Image
                                 borderRadius='full'
                                 boxSize='45px'
-                                src={displayImg}
-                                alt={`portrait of ${firstName} ${lastName}`}
+                                src={current_user?.displayImg}
+                                alt={`portrait of ${current_user?.firstName} ${current_user?.lastName}`}
                             />
                             <Flex direction={"column"}>
-                                <Text fontSize='md'>{`${firstName} ${lastName}`}</Text>
+                                <Text fontSize='md'>{`${current_user?.firstName} ${current_user?.lastName}`}</Text>
                                 <Text fontSize="xs">{username}</Text>
                             </Flex>
                         </Flex>
