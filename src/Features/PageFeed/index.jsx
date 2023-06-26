@@ -9,17 +9,24 @@ import { Button } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { useAuth } from "../../Contexts/AuthProvider"
 import SuggestionBar from "../../Components/SuggestionBar"
+import { POSTS } from "../../Common/reducerTypes"
 
 const PageFeed = () => {
-    const { postsDispatch, allPosts: { posts, feedPosts } } = usePosts()
+    const { postsDispatch, allPosts: { posts, feedPosts, sort_by, sortFeed } } = usePosts()
     const { userData: { user: { user_details, encoded_token } } } = useAuth()
-    const [selected_button, set_selected_button] = useState(null);
+    const [selected_button, set_selected_button] = useState(sort_by);
+    // console.log("from sort", sort_by, sortFeed)
 
     useEffect(() => {
         postsDispatch({ type: "ADD_TO_FEED", payload: (posts).filter(eachPost => eachPost.username === user_details.username) })
-    }, [posts])
+        // when user does any action like liking or bookmarking, this is to set the sort functionality again.
+        postsDispatch({ type: POSTS.SET_SORT, payload: selected_button })
+    }, [posts, user_details, selected_button])
 
-    const handle_select = (e) => set_selected_button(e.target.value)
+    const handle_select = (e) => {
+        postsDispatch({ type: POSTS.SET_SORT, payload: e.target.value })
+        set_selected_button(e.target.value)
+    }
     return (
         <>
             <Nav />

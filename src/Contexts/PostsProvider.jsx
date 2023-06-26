@@ -12,7 +12,9 @@ export const PostsProvider = ({ children }) => {
     const { userData: { user: { user_details } } } = useAuth()
     const initialPosts = {
         posts: [],
-        feedPosts: []
+        feedPosts: [],
+        sortedFeed: [],
+        sort_by: ""
     }
     const [allPosts, postsDispatch] = useReducer(postsReducer, initialPosts)
 
@@ -31,6 +33,23 @@ export const PostsProvider = ({ children }) => {
         }
         fetchPosts()
     }, [user_details])
+
+    // useEffect(() => {
+    //     console.log("inside render")
+    //     postsDispatch({ type: "ADD_TO_FEED", payload: (allPosts.posts).filter(eachPost => eachPost.username === user_details.username) })
+    // }, [allPosts.posts, user_details, allPosts.sort_by])
+
+    // useEffect(() => {
+    //     const sorted = allPosts.feedPosts.sort(function (a, b) {
+    //         if (allPosts.sort_by === "trending") {
+    //             return b.likes.likeCount - a.likes.likeCount
+    //         } else if (allPosts.sort_by === "latest") {
+    //             return new Date(b.createdAt) - new Date(a.createdAt)
+    //         }
+    //     })
+
+    //     postsDispatch({ type: "ADD_TO_FEED", payload: sorted })
+    // }, [allPosts.sort_by])
 
     return (
         <PostsContext.Provider value={{ allPosts, postsDispatch }}>

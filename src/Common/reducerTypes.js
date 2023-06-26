@@ -1,6 +1,7 @@
 export const POSTS = {
     INITIALISE: "INITIALISE_POSTS",
-    FEED: "ADD_TO_FEED"
+    FEED: "ADD_TO_FEED",
+    SET_SORT: "SORT_BY"
 }
 
 export const USERS = {
