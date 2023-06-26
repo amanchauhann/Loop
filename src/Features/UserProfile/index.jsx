@@ -87,15 +87,22 @@ const UserProfile = () => {
                             </Box>
                             <Flex align={"center"} gap={5} direction={"column"}>
                                 {is_logged_user ?
-                                    <Button
-                                        onClick={onOpen}
-                                        bg={"transparent"}
-                                        color={"rgb(246, 226, 194)"}
-                                        border={"1px solid currentcolor"}
-                                        _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)", border: "1px solid currentcolor" }}
-                                    >
-                                        Edit
-                                    </Button>
+                                    <>
+                                        <Button
+                                            onClick={onOpen}
+                                            bg={"transparent"}
+                                            color={"rgb(246, 226, 194)"}
+                                            border={"1px solid currentcolor"}
+                                            _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)", border: "1px solid currentcolor" }}
+                                        >
+                                            Edit
+                                        </Button>
+                                        <Tooltip m={3} label="Logout">
+                                            <i onClick={logout_handler} className="fa-solid fa-right-from-bracket fa-lg pointer_cursor"></i>
+                                        </Tooltip>
+                                    </>
+
+
                                     :
                                     user_details?.following?.find(each_following => each_following._id === _id) ?
                                         <Button
@@ -120,9 +127,6 @@ const UserProfile = () => {
                                             Follow
                                         </Button>
                                 }
-                                <Tooltip m={3} label="Logout">
-                                    <i onClick={logout_handler} className="fa-solid fa-right-from-bracket fa-lg pointer_cursor"></i>
-                                </Tooltip>
 
                             </Flex>
 
