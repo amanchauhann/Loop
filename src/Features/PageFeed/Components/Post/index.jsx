@@ -68,7 +68,7 @@ const Post = ({ _id, username, content, likes, createdAt }) => {
         <div>
             <Flex style={divider_border} p={"1rem"} gap={"1rem"} direction={"column"} className="bg_sec">
                 <Flex justify={"space-between"}>
-                    <Link to={`/profile/${userID}`}>
+                    <Link to={`/profile/${username}`}>
                         <Flex gap={"10px"}>
                             <Image
                                 borderRadius='full'

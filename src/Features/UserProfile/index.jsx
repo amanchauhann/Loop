@@ -13,7 +13,7 @@ import { useUsers } from "../../Contexts/UsersProvider"
 import EditProfileModal from "./EditProfileModal"
 
 const UserProfile = () => {
-    const { user_id } = useParams()
+    const { user_name } = useParams()
     const { userData: { user: { user_details, encoded_token } }, authDispacth } = useAuth()
     const { postsDispatch, allPosts: { posts, feedPosts } } = usePosts()
     const { allUsers: { users }, usersDispatch } = useUsers()
@@ -25,7 +25,7 @@ const UserProfile = () => {
     useEffect(() => {
         const getSingleUser = async () => {
             try {
-                const { data, status } = await getSpecificUserService(user_id)
+                const { data, status } = await getSpecificUserService(user_name)
                 if (status === 200) {
                     set_user_profile(data.user)
                     set_is_loading(false)
@@ -34,9 +34,9 @@ const UserProfile = () => {
                 console.error("from userProfile_getSingleUser", e)
             }
         }
-        set_is_logged_user(user_details._id === user_id ? true : false)
+        set_is_logged_user(user_details.username === user_name ? true : false)
         getSingleUser()
-    }, [user_id, user_details])
+    }, [user_name, user_details])
 
     const follow_unfollow_handler = (service, _id, encoded_token) => {
         const follow_user = async () => {

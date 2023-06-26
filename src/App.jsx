@@ -26,7 +26,7 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/liked" element={<Liked />} />
-          <Route path="profile/:user_id" element={<UserProfile />} />
+          <Route path="profile/:user_name" element={<UserProfile />} />
           <Route path="post/:post_id" element={<PostDetails />} />
         </Route>
 
