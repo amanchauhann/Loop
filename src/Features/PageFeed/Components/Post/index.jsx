@@ -35,7 +35,7 @@ const Post = ({ _id, username, content, likes, createdAt }) => {
             }
         }
         get_this_user()
-    }, [])
+    }, [user_details])
 
     const delete_handler = (id, encodedToken) => {
         const delete_post = async () => {
