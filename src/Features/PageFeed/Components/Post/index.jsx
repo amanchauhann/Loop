@@ -14,7 +14,7 @@ import { useState } from "react"
 import { useDisclosure } from "@chakra-ui/react"
 import EditModal from "./EditModal"
 
-const Post = ({ _id, username, content, likes, updatedAt }) => {
+const Post = ({ _id, username, content, likes, createdAt }) => {
     const { allUsers: { users } } = useUsers()
     const { authDispacth, userData: { user: { user_details, encoded_token } } } = useAuth()
     const { postsDispatch, allPosts: { posts } } = usePosts()
@@ -156,7 +156,7 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
                         </div>
                     }
                 </Flex>
-                <p>{updatedAt.substring(0, 10).split('-').reverse().join('-')}</p>
+                <p>{createdAt.substring(0, 10).split('-').reverse().join('-')}</p>
             </Flex>
             <EditModal isOpen={isOpen} onClose={onClose} content={content} _id={_id} encoded_token={encoded_token} />
         </div>
