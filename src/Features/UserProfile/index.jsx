@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { getFollowService, getSpecificUserService, getUnfollowService } from "../../Services/userServices"
 import { useState } from "react"
-import { Avatar, Box, Button, Flex, Link, Text, Tooltip } from "@chakra-ui/react"
+import { Avatar, Box, Button, Flex, Link, Text, Tooltip, useDisclosure } from "@chakra-ui/react"
 import { useAuth } from "../../Contexts/AuthProvider"
 import { AUTH, USERS } from "../../Common/reducerTypes"
 import { getSpecificUserPostsService } from "../../Services/postServices"
@@ -10,6 +10,7 @@ import Post from "../PageFeed/Components/Post"
 import PostsLayout from "../../Layout/PostsLayout"
 import { usePosts } from "../../Contexts/PostsProvider"
 import { useUsers } from "../../Contexts/UsersProvider"
+import EditProfileModal from "./EditProfileModal"
 
 const UserProfile = () => {
     const { user_id } = useParams()
@@ -19,6 +20,7 @@ const UserProfile = () => {
     const [user_profile, set_user_profile] = useState({})
     const [user_posts, set_user_posts] = useState([])
     const [is_logged_user, set_is_logged_user] = useState(false)
+    const [is_loading, set_is_loading] = useState(true)
 
     useEffect(() => {
         const getSingleUser = async () => {
@@ -26,6 +28,7 @@ const UserProfile = () => {
                 const { data, status } = await getSpecificUserService(user_id)
                 if (status === 200) {
                     set_user_profile(data.user)
+                    set_is_loading(false)
                 }
             } catch (e) {
                 console.error("from userProfile_getSingleUser", e)
@@ -33,7 +36,7 @@ const UserProfile = () => {
         }
         set_is_logged_user(user_details._id === user_id ? true : false)
         getSingleUser()
-    }, [user_id])
+    }, [user_id, user_details])
 
     const follow_unfollow_handler = (service, _id, encoded_token) => {
         const follow_user = async () => {
@@ -68,6 +71,9 @@ const UserProfile = () => {
     const logout_handler = () => {
         authDispacth({ type: AUTH.LOGOUT })
     }
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     return (
         <>
             <Flex p={"10px"} direction={"column"} gap={10} maxW={"30rem"}>
@@ -81,7 +87,9 @@ const UserProfile = () => {
                             </Box>
                             <Flex align={"center"} gap={5} direction={"column"}>
                                 {is_logged_user ?
-                                    <Button bg={"transparent"}
+                                    <Button
+                                        onClick={onOpen}
+                                        bg={"transparent"}
                                         color={"rgb(246, 226, 194)"}
                                         border={"1px solid currentcolor"}
                                         _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)", border: "1px solid currentcolor" }}
@@ -130,7 +138,7 @@ const UserProfile = () => {
                     </Flex>
                 </Flex>
                 {user_posts.length > 0 ?
-                    <PostsLayout children={user_posts.map(each_post => <Post {...each_post} />)} />
+                    <PostsLayout children={user_posts.map(each_post => <Post key={each_post._id} {...each_post} />)} />
                     :
                     <Text align={"center"} fontSize={"lg"}>No Posts.</Text>
                 }
@@ -138,7 +146,7 @@ const UserProfile = () => {
             </Flex >
 
 
-
+            {!is_loading && <EditProfileModal isOpen={isOpen} onClose={onClose} {...user_profile} />}
         </>
     )
 }

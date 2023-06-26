@@ -36,6 +36,14 @@ export const authReducer = (state, { type, payload }) => {
                     user_details: payload,
                 },
             }
+        case AUTH.UPDATE:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    user_details: payload
+                }
+            }
         default:
             return state
     }
