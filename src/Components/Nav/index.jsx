@@ -10,8 +10,9 @@ const Nav = () => {
     return (
         <nav className="navigation">
             <div className="nav_logo">Loop</div>
-            <Link to="/login">
-                Login
+
+            <Link to={"/mockman"}>
+                Mockman
             </Link>
             <div className="input_container">
                 <input
