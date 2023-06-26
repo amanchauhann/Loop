@@ -11,6 +11,8 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
         bio: bio,
         website: website,
     })
+    const [selected_index, set_selected_index] = useState(null)
+
     const { userData: { user: { user_details, encoded_token } }, authDispacth } = useAuth()
 
     const update_profile_handler = () => {
@@ -41,7 +43,17 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
                             <Box>
                                 <Text>Choose Avatar:</Text>
                                 <Flex justify={"space-between"}>
-                                    {robots_data.map((each_robot, i) => <Avatar key={i} onClick={() => set_update_bio(prev => ({ ...prev, displayImg: `${base}${each_robot}` }))} src={`${base}${each_robot}`} />)}
+                                    {robots_data.map((each_robot, i) => <Avatar
+                                        bg={selected_index === i ? "red" : "none"}
+                                        border={"1px solid grey"}
+                                        key={i}
+                                        onClick={() => {
+                                            set_update_bio(prev => ({ ...prev, displayImg: `${base}${each_robot}` }))
+                                            set_selected_index(i)
+                                        }
+                                        }
+                                        src={`${base}${each_robot}`}
+                                    />)}
                                 </Flex>
 
 
