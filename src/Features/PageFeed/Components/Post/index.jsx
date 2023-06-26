@@ -18,7 +18,7 @@ const Post = ({ _id, username, content, likes, createdAt }) => {
     const { allUsers: { users } } = useUsers()
     const { authDispacth, userData: { user: { user_details, encoded_token } } } = useAuth()
     const { postsDispatch, allPosts: { posts } } = usePosts()
-    const { firstName, lastName, displayImg, _id: userID } = users?.find(eachUser => eachUser.username === username)
+    const { firstName, lastName, displayImg, _id: userID } = username === user_details.username ? user_details : users?.find(eachUser => eachUser.username === username)
     const [is_logged_user, set_is_logged_user] = useState(false)
 
     const delete_handler = (id, encodedToken) => {
