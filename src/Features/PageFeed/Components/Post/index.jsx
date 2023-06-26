@@ -76,7 +76,7 @@ const Post = ({ _id, username, content, likes, createdAt }) => {
 
     useEffect(() => {
         set_is_logged_user(user_details._id === current_user?._id ? true : false)
-    }, [users])
+    }, [users, current_user])
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -94,7 +94,7 @@ const Post = ({ _id, username, content, likes, createdAt }) => {
                             />
                             <Flex direction={"column"}>
                                 <Text fontSize='md'>{`${current_user?.firstName} ${current_user?.lastName}`}</Text>
-                                <Text fontSize="xs">{username}</Text>
+                                <Text fontSize="xs">@{username}</Text>
                             </Flex>
                         </Flex>
                     </Link>
