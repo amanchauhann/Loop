@@ -41,7 +41,7 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
                             <Box>
                                 <Text>Choose Avatar:</Text>
                                 <Flex justify={"space-between"}>
-                                    {robots_data.map(each_robot => <Avatar onClick={() => set_update_bio(prev => ({ ...prev, displayImg: `${base}${each_robot}` }))} src={`${base}${each_robot}`} />)}
+                                    {robots_data.map((each_robot, i) => <Avatar key={i} onClick={() => set_update_bio(prev => ({ ...prev, displayImg: `${base}${each_robot}` }))} src={`${base}${each_robot}`} />)}
                                 </Flex>
 
 
