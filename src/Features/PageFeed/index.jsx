@@ -15,10 +15,11 @@ const PageFeed = () => {
     const { postsDispatch, allPosts: { posts, feedPosts, sort_by, sortFeed } } = usePosts()
     const { userData: { user: { user_details, encoded_token } } } = useAuth()
     const [selected_button, set_selected_button] = useState(sort_by);
-    // console.log("from sort", sort_by, sortFeed)
 
     useEffect(() => {
-        postsDispatch({ type: "ADD_TO_FEED", payload: (posts).filter(eachPost => eachPost.username === user_details.username) })
+        const posts_for_feed = posts?.filter(eachPost => eachPost.username === user_details.username || user_details.following.find(({ username }) => username === eachPost.username))
+        postsDispatch({ type: "ADD_TO_FEED", payload: posts_for_feed })
+
         // when user does any action like liking or bookmarking, this is to set the sort functionality again.
         postsDispatch({ type: POSTS.SET_SORT, payload: selected_button })
     }, [posts, user_details, selected_button])
