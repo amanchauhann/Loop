@@ -126,9 +126,12 @@ const Post = ({ _id, username, content, likes, updatedAt }) => {
                     </Menu>}
                 </Flex>
                 {/* <Divider /> */}
-                <Text fontSize={"sm"}>
-                    {content}
-                </Text>
+                <Link to={`/post/${_id}`}>
+                    <Text fontSize={"sm"}>
+                        {content}
+                    </Text>
+                </Link>
+
                 <Divider />
                 <Flex>
                     {likes?.likedBy.find(({ _id }) => _id === user_details._id) ?

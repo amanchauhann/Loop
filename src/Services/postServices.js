@@ -4,6 +4,10 @@ export const getPostsService = () => {
     return axios.get("/api/posts");
 }
 
+export const getSpecificPost = (post_id) => {
+    return axios.get(`/api/posts/${post_id}`)
+}
+
 export const getSpecificUserPostsService = (username) => {
     return axios.get(`/api/posts/user/${username}`)
 }
