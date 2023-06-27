@@ -4,9 +4,11 @@ import { useAuth } from "../../../Contexts/AuthProvider"
 import { useLocation, useNavigate } from "react-router-dom"
 import Signup from "../Signup"
 import { divider_border } from "../../../Styles/Global"
+import React, { lazy, Suspense } from "react";
 
 
 const Login = () => {
+    const LazySignup = lazy(() => import("../Signup"));
     const { signup, login, userData: { logged } } = useAuth()
     const [show_login, set_show_login] = useState(true)
     const [loginform, setLoginForm] = useState({
@@ -157,7 +159,9 @@ const Login = () => {
                     </Box>
                     :
                     <Box style={divider_border} transform={!show_login ? "rotate(360deg)" : "none"} transition={"2s"} p={3}>
-                        <Signup set_show_login={set_show_login} />
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <LazySignup set_show_login={set_show_login} />
+                        </Suspense>
                     </Box>
 
             }
