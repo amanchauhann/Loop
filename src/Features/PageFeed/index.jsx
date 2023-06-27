@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
 import { useAuth } from "../../Contexts/AuthProvider"
 import SuggestionBar from "../../Components/SuggestionBar"
 import { POSTS } from "../../Common/reducerTypes"
+import Sort from "./Components/Sort"
 
 const PageFeed = () => {
     const { postsDispatch, allPosts: { posts, feedPosts, sort_by, sortFeed } } = usePosts()
@@ -35,35 +36,7 @@ const PageFeed = () => {
                 <SideBar />
                 <Flex p={"10px"} maxW={"35rem"} direction={"column"} gap={"3rem"}>
                     <AddPost />
-                    <Flex>
-                        <Button
-                            flex={1}
-                            bg={selected_button === "latest" ? "transparent" : "rgb(246, 226, 194)"}
-                            color={selected_button === "latest" ? "currentcolor" : "black"}
-                            border={selected_button === "latest" ? "1px solid currentcolor" : "none"}
-                            _hover={{ color: 'currentcolor', bg: "transparent", border: "1px solid currentcolor" }}
-                            _focus={{ outline: 'none' }}
-                            transition={"0.7s"}
-                            value={"latest"}
-                            onClick={handle_select}
-                        >
-                            <i className="fa-solid fa-clock fa-lg"></i>
-                            Latest
-                        </Button>
-                        <Button
-                            flex={1}
-                            bg={selected_button === "trending" ? "transparent" : "rgb(246, 226, 194)"}
-                            color={selected_button === "trending" ? "currentcolor" : "black"}
-                            border={selected_button === "trending" ? "1px solid currentcolor" : "none"}
-                            _hover={{ color: 'currentcolor', bg: "transparent", border: "1px solid currentcolor" }}
-                            _focus={{ outline: 'none' }}
-                            value={"trending"}
-                            onClick={handle_select}
-                        >
-                            <i className="fa-solid fa-fire fa-lg"></i>
-                            Trending
-                        </Button>
-                    </Flex>
+                    <Sort handle_select={handle_select} selected_button={selected_button} />
                     <PostsLayout children={feedPosts.map(eachFeedPost => <Post key={eachFeedPost._id} {...eachFeedPost} />)} />
                 </Flex>
                 <SuggestionBar />
