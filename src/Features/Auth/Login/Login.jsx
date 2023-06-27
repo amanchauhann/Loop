@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, FormLabel, Input, Text } from "@chakra-ui/react"
+import { Box, Button, Flex, FormControl, FormLabel, Input, Text, useBreakpointValue } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { useAuth } from "../../../Contexts/AuthProvider"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -79,10 +79,12 @@ const Login = () => {
             setShowBeat(false);
         }, 3000);
     }, []);
+    const only_large = useBreakpointValue({ base: false, md: true });
+
 
     return (
-        <Flex align={"center"} h={"100vh"} p={"5rem"} overflow={"hidden"}>
-            <Box mx="auto" >
+        <Flex align={"center"} h={"100vh"} p={"5rem"} overflow={"hidden"} justify={"center"}>
+            {only_large && <Box mx="auto" >
                 <Text
                     className={showBeat ? "beat-animation" : ""}
                     id="title"
@@ -92,14 +94,14 @@ const Login = () => {
                 >
                     {title}
                 </Text>
-            </Box>
+            </Box>}
             {
                 show_login ?
                     <Box style={divider_border} p={3} transition={"2s"}>
                         <Text align={"center"} textTransform={"uppercase"}>login</Text>
                         <form onSubmit={login_handler}>
                             <FormControl>
-                                <Flex direction={"column"} gap={"10px"}>
+                                <Flex direction={"column"} gap={"15px"}>
                                     <FormLabel htmlFor="login_username">Username:
                                         <Input
                                             name="username"
@@ -120,7 +122,7 @@ const Login = () => {
                                             value={loginform.password}
                                         />
                                     </FormLabel>
-                                    <Flex direction={"column"} gap={"10px"}>
+                                    <Flex direction={"column"} gap={"15px"}>
                                         <Button
                                             p={"10px"}
                                             flex={1}
