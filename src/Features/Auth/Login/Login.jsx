@@ -104,6 +104,7 @@ const Login = () => {
                                 <Flex direction={"column"} gap={"15px"}>
                                     <FormLabel htmlFor="login_username">Username:
                                         <Input
+                                            required
                                             name="username"
                                             id={"login_username"}
                                             placeholder={"Enter Username"}
@@ -114,6 +115,7 @@ const Login = () => {
                                     </FormLabel>
                                     <FormLabel htmlFor="login_password">Password:
                                         <Input
+                                            required
                                             name="password"
                                             id={"login_password"}
                                             placeholder={"Enter Password"}

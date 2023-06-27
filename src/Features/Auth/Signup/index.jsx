@@ -39,6 +39,7 @@ const Signup = ({ set_show_login }) => {
                     <Flex direction={"column"} gap={2}>
                         <FormLabel htmlFor="firstName">First Name:
                             <Input
+                                required
                                 value={signup_form.firstName}
                                 onChange={creds_handler}
                                 name="firstName"
@@ -49,6 +50,7 @@ const Signup = ({ set_show_login }) => {
                         </FormLabel>
                         <FormLabel htmlFor="lastName">Last Name:
                             <Input
+                                required
                                 value={signup_form.lastName}
                                 onChange={creds_handler}
                                 name="lastName"
@@ -59,6 +61,7 @@ const Signup = ({ set_show_login }) => {
                         </FormLabel>
                         <FormLabel htmlFor="username">Username:
                             <Input
+                                required
                                 value={signup_form.username}
                                 onChange={creds_handler}
                                 name="username"
@@ -69,6 +72,7 @@ const Signup = ({ set_show_login }) => {
                         </FormLabel>
                         <FormLabel htmlFor="password">Password:
                             <Input
+                                required
                                 value={signup_form.password}
                                 onChange={creds_handler}
                                 name="password"
