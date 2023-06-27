@@ -4,7 +4,7 @@ import { useAuth } from "../../../Contexts/AuthProvider"
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 
-const Signup = ({ set_show_login, set_transform_value }) => {
+const Signup = ({ set_show_login }) => {
     const [signup_form, set_signup_form] = useState({
         firstName: "",
         lastName: "",
@@ -100,10 +100,7 @@ const Signup = ({ set_show_login, set_transform_value }) => {
                 // border={"1px solid grey"}
                 _hover={{ textDecoration: "underline", cursor: "pointer" }}
                 transition={"0.7s"}
-                onClick={() => {
-                    set_show_login(true)
-                    set_transform_value("rotate(360deg)")
-                }}
+                onClick={() => set_show_login(true)}
                 textAlign={"center"}
             >
                 🚪Go back to login

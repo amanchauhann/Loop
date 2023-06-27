@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import Signup from "../Signup"
 import { divider_border } from "../../../Styles/Global"
 
+
 const Login = () => {
     const { signup, login, userData: { logged } } = useAuth()
     const [show_login, set_show_login] = useState(true)
@@ -12,6 +13,7 @@ const Login = () => {
         username: "",
         password: ""
     })
+    const [showBeat, setShowBeat] = useState(true);
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -40,10 +42,52 @@ const Login = () => {
         logged && navigate(location?.state?.from?.pathname);
     }, [logged])
 
+    const handleMouseOver = (event) => {
+        let iterations = 0;
+        const intervalID = setInterval(() => {
+            event.target.innerText = event.target.innerText.split("").map((each_letter, i) => {
+                console.log(event.target.dataset.value.length)
+                if (i < iterations) {
+                    return event.target.dataset.value[i]
+                }
+                return alphabets[Math.floor(Math.random() * 26)]
+            }).join("")
+            if (iterations >= 4) {
+                clearInterval(intervalID)
+                iterations = 0
+            }
+            iterations += 1 / 3
+        }, 100);
+    };
+
+    const alphabets = "abcdefghijklmnopqrstuvwxyz"
+    useEffect(() => {
+        const titleElement = document.getElementById("title");
+        titleElement.addEventListener("mouseover", handleMouseOver);
+
+        return () => {
+            titleElement.removeEventListener("mouseover", handleMouseOver);
+        };
+    }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setShowBeat(false);
+        }, 3000);
+    }, []);
+
     return (
         <Flex align={"center"} h={"100vh"} p={"5rem"} overflow={"hidden"}>
             <Box mx="auto" >
-                <Text fontSize={"6xl"} letterSpacing={15}>LOOP</Text>
+                <Text
+                    className={showBeat ? "beat-animation" : ""}
+                    id="title"
+                    fontSize={"6xl"}
+                    letterSpacing={15}
+                    data-value="LOOP"
+                >
+                    LOOP
+                </Text>
             </Box>
             {
                 show_login ?
