@@ -16,6 +16,7 @@ const Login = () => {
         password: ""
     })
     const [showBeat, setShowBeat] = useState(true);
+    const [title, set_title] = useState("LOOP")
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -44,16 +45,16 @@ const Login = () => {
         logged && navigate(location?.state?.from?.pathname);
     }, [logged])
 
-    const handleMouseOver = (event) => {
+    const handleMouseOver = () => {
         let iterations = 0;
         const intervalID = setInterval(() => {
-            event.target.innerText = event.target.innerText.split("").map((each_letter, i) => {
-                console.log(event.target.dataset.value.length)
+            set_title(title.split("").map((each_letter, i) => {
+                console.log(title.length)
                 if (i < iterations) {
-                    return event.target.dataset.value[i]
+                    return title[i]
                 }
                 return alphabets[Math.floor(Math.random() * 26)]
-            }).join("")
+            }).join(""))
             if (iterations >= 4) {
                 clearInterval(intervalID)
                 iterations = 0
@@ -64,12 +65,13 @@ const Login = () => {
 
     const alphabets = "abcdefghijklmnopqrstuvwxyz"
     useEffect(() => {
-        const titleElement = document.getElementById("title");
-        titleElement.addEventListener("mouseover", handleMouseOver);
+        handleMouseOver()
+        // const titleElement = document.getElementById("title");
+        // titleElement.addEventListener("mouseover", handleMouseOver);
 
-        return () => {
-            titleElement.removeEventListener("mouseover", handleMouseOver);
-        };
+        // return () => {
+        //     titleElement.removeEventListener("mouseover", handleMouseOver);
+        // };
     }, []);
 
     useEffect(() => {
@@ -88,7 +90,7 @@ const Login = () => {
                     letterSpacing={15}
                     data-value="LOOP"
                 >
-                    LOOP
+                    {title}
                 </Text>
             </Box>
             {
