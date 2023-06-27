@@ -2,13 +2,17 @@ import { Box, Button, Flex, FormControl, FormLabel, Input, Text } from "@chakra-
 import { useEffect, useState } from "react"
 import { useAuth } from "../../../Contexts/AuthProvider"
 import { useLocation, useNavigate } from "react-router-dom"
+import Signup from "../Signup"
+import { divider_border } from "../../../Styles/Global"
 
 const Login = () => {
-    const { login, userData: { logged } } = useAuth()
+    const { signup, login, userData: { logged } } = useAuth()
+    const [show_login, set_show_login] = useState(true)
     const [loginform, setLoginForm] = useState({
         username: "",
         password: ""
     })
+
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -37,64 +41,83 @@ const Login = () => {
     }, [logged])
 
     return (
-        <Flex border={"1px solid red"} justify={"center"}>
-            {/* <Box>This will be left.</Box> */}
-            <Box>
-                <Text align={"center"}>LOOP</Text>
-                <form onSubmit={login_handler}>
-                    <FormControl>
-                        <Flex direction={"column"} gap={"10px"}>
-                            <FormLabel htmlFor="login_username">Username:
-                                <Input
-                                    name="username"
-                                    id={"login_username"}
-                                    placeholder={"Enter Username"}
-                                    type={"text"}
-                                    onChange={creds_handler}
-                                    value={loginform.username}
-                                />
-                            </FormLabel>
-                            <FormLabel htmlFor="login_password">Password:
-                                <Input
-                                    name="password"
-                                    id={"login_password"}
-                                    placeholder={"Enter Password"}
-                                    type={"password"}
-                                    onChange={creds_handler}
-                                    value={loginform.password}
-                                />
-                            </FormLabel>
-                            <Flex direction={"column"} gap={"10px"}>
-                                <Button
-                                    p={"10px"}
-                                    flex={1}
-                                    bg={"none"}
-                                    color={"currentcolor"}
-                                    border={"1px solid currentcolor"}
-                                    _hover={{ color: 'black', bg: "rgb(246, 226, 194)", border: "1px solid black" }}
-                                    _focus={{ outline: 'none' }}
-                                    transition={"0.7s"}
-                                    type="submit"
-                                >Login</Button>
-                                <Button
-                                    p={"10px"}
-                                    flex={1}
-                                    bg={"rgb(246, 226, 194)"}
-                                    color={"black"}
-                                    border={"1px solid black"}
-                                    _hover={{ color: 'currentcolor', bg: "transparent", border: "1px solid currentcolor" }}
-                                    _focus={{ outline: 'none' }}
-                                    transition={"0.7s"}
-                                    onClick={guest_handler}
-                                >Login as Guest</Button>
-                            </Flex>
-                        </Flex>
-
-
-                    </FormControl>
-                </form>
+        <Flex align={"center"} h={"100vh"} p={"5rem"} overflow={"hidden"}>
+            <Box mx="auto" >
+                <Text fontSize={"6xl"} letterSpacing={15}>LOOP</Text>
             </Box>
-        </Flex>
+            {
+                show_login ?
+                    <Box style={divider_border} p={3} transition={"2s"}>
+                        <Text align={"center"} textTransform={"uppercase"}>login</Text>
+                        <form onSubmit={login_handler}>
+                            <FormControl>
+                                <Flex direction={"column"} gap={"10px"}>
+                                    <FormLabel htmlFor="login_username">Username:
+                                        <Input
+                                            name="username"
+                                            id={"login_username"}
+                                            placeholder={"Enter Username"}
+                                            type={"text"}
+                                            onChange={creds_handler}
+                                            value={loginform.username}
+                                        />
+                                    </FormLabel>
+                                    <FormLabel htmlFor="login_password">Password:
+                                        <Input
+                                            name="password"
+                                            id={"login_password"}
+                                            placeholder={"Enter Password"}
+                                            type={"password"}
+                                            onChange={creds_handler}
+                                            value={loginform.password}
+                                        />
+                                    </FormLabel>
+                                    <Flex direction={"column"} gap={"10px"}>
+                                        <Button
+                                            p={"10px"}
+                                            flex={1}
+                                            bg={"none"}
+                                            color={"currentcolor"}
+                                            border={"1px solid currentcolor"}
+                                            _hover={{ color: 'black', bg: "rgb(246, 226, 194)", border: "1px solid black" }}
+                                            _focus={{ outline: 'none' }}
+                                            transition={"0.7s"}
+                                            type="submit"
+                                        >Login</Button>
+                                        <Button
+                                            p={"10px"}
+                                            flex={1}
+                                            bg={"rgb(246, 226, 194)"}
+                                            color={"black"}
+                                            border={"1px solid black"}
+                                            _hover={{ color: 'currentcolor', bg: "transparent", border: "1px solid currentcolor" }}
+                                            _focus={{ outline: 'none' }}
+                                            transition={"0.7s"}
+                                            onClick={guest_handler}
+                                        >Login as Guest</Button>
+                                    </Flex>
+                                </Flex>
+                            </FormControl>
+                        </form>
+                        <Text m={"1rem"} fontSize={"sm"}>
+                            Don't have a account.
+                            <Text as={"span"}
+                                cursor={"pointer"}
+                                color={"grey"}
+                                _hover={{ textDecoration: "underline" }}
+                                onClick={() => set_show_login(false)}
+                            >
+                                Sign up here
+                            </Text>
+                        </Text>
+                    </Box>
+                    :
+                    <Box style={divider_border} transform={!show_login ? "rotate(360deg)" : "none"} transition={"2s"} p={3}>
+                        <Signup set_show_login={set_show_login} />
+                    </Box>
+
+            }
+        </Flex >
     )
 }
 

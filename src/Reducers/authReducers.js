@@ -11,6 +11,15 @@ export const authReducer = (state, { type, payload }) => {
                 },
                 logged: true
             }
+        case AUTH.SIGNUP:
+            return {
+                ...state,
+                user: {
+                    user_details: payload.createdUser,
+                    encoded_token: payload.encodedToken
+                },
+                logged: true
+            }
         case AUTH.LOGOUT:
             return {
                 ...state,

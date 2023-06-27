@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useContext } from "react";
 import { createContext } from "react";
-import { getLoginService } from "../Services/authServices";
+import { getLoginService, getSignupService } from "../Services/authServices";
 import { useReducer } from "react";
 import { authReducer } from "../Reducers/authReducers";
 import { AUTH } from "../Common/reducerTypes";
@@ -29,8 +29,19 @@ export const AuthProvider = ({ children }) => {
             console.error("error from auth provider", e)
         }
     }
+
+    const signup = async (credentials) => {
+        try {
+            const { data, status } = await getSignupService(credentials)
+            if (status === 201)
+                authDispacth({ type: AUTH.SIGNUP, payload: data })
+            // console.log("signup", res)
+        } catch (e) {
+            console.error("from signup", e)
+        }
+    }
     return (
-        <AuthContext.Provider value={{ login, userData, authDispacth }}>
+        <AuthContext.Provider value={{ login, signup, userData, authDispacth }}>
             {children}
         </AuthContext.Provider>
     )

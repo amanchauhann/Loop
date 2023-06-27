@@ -11,6 +11,7 @@ export const USERS = {
 
 export const AUTH = {
     LOGIN: "LOGIN",
+    SIGNUP: "SIGNUP",
     SET_BOOKMARKS: "SET_BOOKMARKS",
     LOGOUT: "LOGOUT",
     UPDATE: "UPDATE"
