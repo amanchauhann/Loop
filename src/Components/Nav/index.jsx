@@ -10,7 +10,7 @@ const Nav = () => {
     }
     return (
         <nav className="navigation" style={{ ...divider_border, position: "sticky", top: 0, zIndex: 1 }}>
-            <div className="nav_logo">Loop</div>
+            <Link to={"/"} style={{ color: "currentcolor" }}>Loop</Link>
 
             <Link to={"/mockman"}>
                 Mockman
