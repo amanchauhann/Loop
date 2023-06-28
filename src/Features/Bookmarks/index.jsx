@@ -21,7 +21,7 @@ const Bookmarks = () => {
         <PostsLayout children={bookmarked_posts.map(each_bookmarked =>
             <Post key={each_bookmarked._id} {...each_bookmarked} />)} />
         :
-        <Heading size="lg" mt="16" p={"10rem"}>
+        <Heading size="lg" mt="16" w={"35rem"} textAlign={"center"}>
             No Bookmarks Yet
         </Heading>
 

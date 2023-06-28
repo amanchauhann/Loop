@@ -21,7 +21,7 @@ const Liked = () => {
                 <PostsLayout children={liked_by_user.map(each_liked =>
                     <Post key={each_liked._id} {...each_liked} />)} />
                 :
-                <Heading size="lg" mt="16">
+                <Heading size="lg" mt="16" w={"35rem"} textAlign={"center"}>
                     No Liked Posts Yet
                 </Heading>} />
         </>
