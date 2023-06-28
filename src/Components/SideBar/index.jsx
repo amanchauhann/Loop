@@ -27,7 +27,7 @@ const SideBar = () => {
                 </div>
             </NavLink>
 
-            <NavLink to={"/liked"}>
+            <NavLink to={"/liked"} style={getActiveStyle}>
                 <div className="sidebar_item" align="center">
                     <i className="fa-solid fa-heart fa-xl"></i>
                 </div>
