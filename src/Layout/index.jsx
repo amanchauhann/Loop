@@ -7,7 +7,7 @@ const Layout = ({ children, is_loading }) => {
     return (
         <>
             <Nav />
-            <Flex>
+            <Flex justify={"space-between"}>
                 <SideBar />
                 {is_loading ? <Text>LOADING</Text> :
                     children
