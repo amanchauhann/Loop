@@ -10,15 +10,10 @@
     flex-grow: 1;
     outline: 1px solid var(--secondary-color);
     transition: 0.5s;
-
 }
 
 .add_post_input:focus {
     outline: 1px solid grey;
-}
-
-.input_lg {
-    /* width: "100px"; */
 }
 
 .post_btn {
