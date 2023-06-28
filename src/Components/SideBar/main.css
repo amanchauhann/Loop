@@ -1,11 +1,10 @@
 .sidebar_container {
-    /* border: 1px solid red; */
     width: 5rem;
     height: 100vh;
     background-color: var(--secondary-color);
 }
 
 .sidebar_item {
-    border: 1px solid yellow;
+    outline: 1px solid grey;
     padding: 1rem;
 }

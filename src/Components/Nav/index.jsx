@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./main.css"
 import { Link } from "react-router-dom";
+import { divider_border } from "../../Styles/Global";
 
 const Nav = () => {
     const [search_value, setSearch_value] = useState("");
@@ -8,7 +9,7 @@ const Nav = () => {
         setSearch_value(e.target.value);
     }
     return (
-        <nav className="navigation">
+        <nav className="navigation" style={divider_border}>
             <div className="nav_logo">Loop</div>
 
             <Link to={"/mockman"}>
