@@ -8,6 +8,7 @@ import { useAuth } from "../../../../Contexts/AuthProvider";
 import { getAddPostService } from "../../../../Services/postServices";
 import { usePosts } from "../../../../Contexts/PostsProvider";
 import { POSTS } from "../../../../Common/reducerTypes";
+import { useBreakpointValue } from "@chakra-ui/react";
 
 const AddPost = () => {
     const [content, set_content] = useState("")
@@ -27,6 +28,10 @@ const AddPost = () => {
         }
         add_post()
     }
+
+    const for_lg = useBreakpointValue({ base: false, md: true });
+
+
     return (
         // <div className="add_post_container">
         <Flex style={divider_border} p={"1rem"} h={"fit-content"} direction={"column"} gap={"1rem"}>
@@ -37,7 +42,7 @@ const AddPost = () => {
                     src={displayImg}
                     alt={displayImg}
                 />
-                <input value={content} onChange={(e) => set_content(e.target.value)} className="add_post_input" type="text" />
+                <input value={content} onChange={(e) => set_content(e.target.value)} className={for_lg ? "add_post_input input_lg" : "add_post_input"} type="text" />
             </Flex>
             <Flex justify={"space-between"} align={"center"}>
                 <Flex gap={"1rem"} align={"center"}>
