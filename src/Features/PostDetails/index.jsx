@@ -32,21 +32,19 @@ const PostDetails = () => {
     }, [posts])
 
     return (
-        <Layout children={
-            <Flex direction={"column"} gap={"3rem"} maxW={"35rem"} p={"10px"}>
-                {is_loading ?
-                    <Text>LOADING</Text>
-                    :
+        <Layout
+            is_loading={is_loading}
+            children={
+                <Flex direction={"column"} gap={"3rem"} maxW={"35rem"} p={"10px"}>
                     <>
                         <Post {...user_post} />
                         <AddComment user_post={user_post} />
                         <Flex direction={"column"} gap={5}>
-                            {user_post.comments.map(each_comment => <Comment key={each_comment._id} {...each_comment} />)}
+                            {user_post?.comments?.map(each_comment => <Comment key={each_comment._id} {...each_comment} />)}
                         </Flex>
                     </>
-                }
-            </Flex>
-        } />
+                </Flex>
+            } />
     )
 }
 

@@ -78,6 +78,7 @@ const UserProfile = () => {
     return (
         <>
             <Layout
+                is_loading={is_loading}
                 children={
                     <Flex p={"10px"} direction={"column"} gap={10}>
                         <Flex p={"10px"} gap={3} border={'1px solid grey'}>
@@ -153,8 +154,6 @@ const UserProfile = () => {
                     </Flex >
                 }
             />
-
-
 
             {!is_loading && <EditProfileModal isOpen={isOpen} onClose={onClose} {...user_profile} />}
         </>
