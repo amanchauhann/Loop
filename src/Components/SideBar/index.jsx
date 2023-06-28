@@ -1,28 +1,37 @@
 import { Flex } from "@chakra-ui/react";
 import "./main.css"
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const SideBar = () => {
+    const getActiveStyle = ({ isActive }) => ({
+        background: isActive ? "rgba(29, 29, 30, 0.7)" : "none"
+    })
     return (
         <Flex className="sidebar_container" direction={"column"} w={"5rem"} minH={"100vh"}>
-            <div className="sidebar_item" align="center">
-                <Link to="/">
+
+            <NavLink to="/" style={getActiveStyle}>
+                <div className="sidebar_item" align="center">
                     <i className="fa-solid fa-house fa-xl"></i>
-                </Link>
-            </div>
-            <div className="sidebar_item" align="center">
-                <Link to="/explore">
+                </div>
+            </NavLink>
+
+            <NavLink to="/explore" style={getActiveStyle}>
+                <div className="sidebar_item" align="center">
                     <i className="fa-solid fa-compass fa-xl"></i>
-                </Link>
+                </div>
+            </NavLink>
 
-            </div>
-            <Link to="/bookmarks">
-                <div className="sidebar_item" align="center"><i className="fa-solid fa-bookmark fa-xl"></i></div>
-            </Link>
+            <NavLink to="/bookmarks" style={getActiveStyle}>
+                <div className="sidebar_item" align="center">
+                    <i className="fa-solid fa-bookmark fa-xl"></i>
+                </div>
+            </NavLink>
 
-            <Link to={"/liked"}>
-                <div className="sidebar_item" align="center"><i className="fa-solid fa-heart fa-xl"></i></div>
-            </Link>
+            <NavLink to={"/liked"}>
+                <div className="sidebar_item" align="center">
+                    <i className="fa-solid fa-heart fa-xl"></i>
+                </div>
+            </NavLink>
 
         </Flex>
     )
