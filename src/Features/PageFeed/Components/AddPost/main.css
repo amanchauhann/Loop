@@ -7,9 +7,10 @@
     border-radius: 5px;
     padding: 1.2rem .3rem;
     /* for =====desktop==== */
-    /* flex-grow: 1; */
+    flex-grow: 1;
     outline: 1px solid var(--secondary-color);
     transition: 0.5s;
+
 }
 
 .add_post_input:focus {
@@ -17,7 +18,7 @@
 }
 
 .input_lg {
-    flex: 1;
+    /* width: "100px"; */
 }
 
 .post_btn {
