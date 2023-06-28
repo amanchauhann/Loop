@@ -28,7 +28,7 @@ const Chip = ({ _id, displayImg, firstName, lastName, username }) => {
     return (
         <>
             <Flex align={"center"} gap={3} justify={"space-between"}>
-                <Link to={`/profile/${_id}`}>
+                <Link to={`/profile/${username}`}>
                     <Flex gap={"1rem"}>
                         <Avatar name={`${firstName} ${lastName}`} src={displayImg} />
                         <Box>
