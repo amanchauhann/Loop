@@ -11,6 +11,7 @@ import { useAuth } from "../../Contexts/AuthProvider"
 import SuggestionBar from "../../Components/SuggestionBar"
 import { POSTS } from "../../Common/reducerTypes"
 import Sort from "./Components/Sort"
+import Layout from "../../Layout"
 
 const PageFeed = () => {
     const { postsDispatch, allPosts: { posts, feedPosts, sort_by, sortFeed } } = usePosts()
@@ -31,17 +32,13 @@ const PageFeed = () => {
     }
     return (
         <>
-            <Nav />
-            <Flex>
-                <SideBar />
+            <Layout children={
                 <Flex p={"10px"} maxW={"35rem"} direction={"column"} gap={"3rem"}>
                     <AddPost />
                     <Sort handle_select={handle_select} selected_button={selected_button} />
                     <PostsLayout children={feedPosts.map(eachFeedPost => <Post key={eachFeedPost._id} {...eachFeedPost} />)} />
                 </Flex>
-                <SuggestionBar />
-            </Flex>
-
+            } />
         </>
     )
 }

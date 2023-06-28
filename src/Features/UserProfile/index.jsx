@@ -11,6 +11,7 @@ import PostsLayout from "../../Layout/PostsLayout"
 import { usePosts } from "../../Contexts/PostsProvider"
 import { useUsers } from "../../Contexts/UsersProvider"
 import EditProfileModal from "./EditProfileModal"
+import Layout from "../../Layout"
 
 const UserProfile = () => {
     const { user_name } = useParams()
@@ -76,78 +77,83 @@ const UserProfile = () => {
 
     return (
         <>
-            <Flex p={"10px"} direction={"column"} gap={10} maxW={"30rem"}>
-                <Flex p={"10px"} gap={3} border={'1px solid grey'}>
-                    <Avatar name={`${firstName} ${lastName}`} src={displayImg} />
-                    <Flex direction={"column"} gap={2}>
-                        <Flex justify={"space-between"}>
-                            <Box>
-                                <Text fontSize='md'>{firstName} {lastName}</Text>
-                                <Text fontSize={"xs"}>@{username}</Text>
-                            </Box>
-                            <Flex align={"center"} gap={5} direction={"column"}>
-                                {is_logged_user ?
-                                    <>
-                                        <Button
-                                            onClick={onOpen}
-                                            bg={"transparent"}
-                                            color={"rgb(246, 226, 194)"}
-                                            border={"1px solid currentcolor"}
-                                            _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)", border: "1px solid currentcolor" }}
-                                        >
-                                            Edit
-                                        </Button>
-                                        <Tooltip m={3} label="Logout">
-                                            <i onClick={logout_handler} className="fa-solid fa-right-from-bracket fa-lg pointer_cursor"></i>
-                                        </Tooltip>
-                                    </>
+            <Layout
+                children={
+                    <Flex p={"10px"} direction={"column"} gap={10}>
+                        <Flex p={"10px"} gap={3} border={'1px solid grey'}>
+                            <Avatar name={`${firstName} ${lastName}`} src={displayImg} />
+                            <Flex direction={"column"} gap={2}>
+                                <Flex justify={"space-between"}>
+                                    <Box>
+                                        <Text fontSize='md'>{firstName} {lastName}</Text>
+                                        <Text fontSize={"xs"}>@{username}</Text>
+                                    </Box>
+                                    <Flex align={"center"} gap={5} direction={"column"}>
+                                        {is_logged_user ?
+                                            <>
+                                                <Button
+                                                    onClick={onOpen}
+                                                    bg={"transparent"}
+                                                    color={"rgb(246, 226, 194)"}
+                                                    border={"1px solid currentcolor"}
+                                                    _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)", border: "1px solid currentcolor" }}
+                                                >
+                                                    Edit
+                                                </Button>
+                                                <Tooltip m={3} label="Logout">
+                                                    <i onClick={logout_handler} className="fa-solid fa-right-from-bracket fa-lg pointer_cursor"></i>
+                                                </Tooltip>
+                                            </>
 
 
-                                    :
-                                    user_details?.following?.find(each_following => each_following._id === _id) ?
-                                        <Button
-                                            bg={"transparent"}
-                                            color={"rgb(246, 226, 194)"}
-                                            border={"1px solid currentcolor"}
-                                            _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)" }}
-                                            _focus={{ outline: 'none' }}
-                                            onClick={() => follow_unfollow_handler(getUnfollowService, _id, encoded_token)}
-                                        >
-                                            Unfollow</Button>
-                                        :
-                                        <Button
-                                            bg={"rgb(246, 226, 194)"}
-                                            color={"black"}
-                                            border={"1px solid currentcolor"}
-                                            _hover={{ color: 'currentcolor', bg: "transparent", border: "1px solid currentcolor" }}
-                                            _focus={{ outline: 'none' }}
-                                            transition={"0.7s"}
-                                            onClick={() => follow_unfollow_handler(getFollowService, _id, encoded_token)}
-                                        >
-                                            Follow
-                                        </Button>
-                                }
+                                            :
+                                            user_details?.following?.find(each_following => each_following._id === _id) ?
+                                                <Button
+                                                    bg={"transparent"}
+                                                    color={"rgb(246, 226, 194)"}
+                                                    border={"1px solid currentcolor"}
+                                                    _hover={{ color: 'currentcolor', bg: "rgba(246, 226, 194, 0.1)" }}
+                                                    _focus={{ outline: 'none' }}
+                                                    onClick={() => follow_unfollow_handler(getUnfollowService, _id, encoded_token)}
+                                                >
+                                                    Unfollow</Button>
+                                                :
+                                                <Button
+                                                    bg={"rgb(246, 226, 194)"}
+                                                    color={"black"}
+                                                    border={"1px solid currentcolor"}
+                                                    _hover={{ color: 'currentcolor', bg: "transparent", border: "1px solid currentcolor" }}
+                                                    _focus={{ outline: 'none' }}
+                                                    transition={"0.7s"}
+                                                    onClick={() => follow_unfollow_handler(getFollowService, _id, encoded_token)}
+                                                >
+                                                    Follow
+                                                </Button>
+                                        }
 
+                                    </Flex>
+
+
+                                </Flex>
+                                <Text>{bio}</Text>
+                                <Link href={website} fontSize={"sm"} isExternal>{website}</Link>
+                                <Flex gap={4} justify={"space-between"}>
+                                    <Text>3 posts</Text>
+                                    <Text>{followers?.length} followers</Text>
+                                    <Text>{following?.length} following</Text>
+                                </Flex>
                             </Flex>
-
-
                         </Flex>
-                        <Text>{bio}</Text>
-                        <Link href={website} fontSize={"sm"} isExternal>{website}</Link>
-                        <Flex gap={4} justify={"space-between"}>
-                            <Text>3 posts</Text>
-                            <Text>{followers?.length} followers</Text>
-                            <Text>{following?.length} following</Text>
-                        </Flex>
-                    </Flex>
-                </Flex>
-                {user_posts.length > 0 ?
-                    <PostsLayout children={user_posts.map(each_post => <Post key={each_post._id} {...each_post} />)} />
-                    :
-                    <Text align={"center"} fontSize={"lg"}>No Posts.</Text>
+                        {user_posts.length > 0 ?
+                            <PostsLayout children={user_posts.map(each_post => <Post key={each_post._id} {...each_post} />)} />
+                            :
+                            <Text align={"center"} fontSize={"lg"}>No Posts.</Text>
+                        }
+
+                    </Flex >
                 }
+            />
 
-            </Flex >
 
 
             {!is_loading && <EditProfileModal isOpen={isOpen} onClose={onClose} {...user_profile} />}

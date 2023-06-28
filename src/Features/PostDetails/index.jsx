@@ -8,6 +8,7 @@ import { divider_border } from "../../Styles/Global"
 import Comment from "./Components/Comment"
 import AddComment from "./Components/AddComment"
 import { usePosts } from "../../Contexts/PostsProvider"
+import Layout from "../../Layout"
 
 const PostDetails = () => {
     const { post_id } = useParams()
@@ -31,36 +32,21 @@ const PostDetails = () => {
     }, [posts])
 
     return (
-        <Flex direction={"column"} gap={"3rem"} maxW={"35rem"} p={"10px"}>
-            {is_loading ?
-                <Text>LOADING</Text>
-                :
-                <>
-                    <Post {...user_post} />
-                    <AddComment user_post={user_post} />
-                    <Flex direction={"column"} gap={5}>
-                        {user_post.comments.map(each_comment => <Comment key={each_comment._id} {...each_comment} />)}
-                    </Flex>
-
-
-                </>
-            }
-        </Flex>
-
-        // <Flex direction={"column"} gap={"3rem"}>
-        //     {is_loading ? <Text>LOADING</Text> : <Post {...user_post} />}
-        //     <Flex style={divider_border} direction={"column"} gap={4}>
-        //         <Flex gap={3}>
-        //             <Avatar />
-        //             <Box>
-        //                 <Text fontWeight={500} fontSize={"md"}>aman</Text>
-        //                 <Text fontWeight={300} fontSize={"xs"}>@{user_post.comments.username}</Text>
-        //             </Box>
-        //         </Flex>
-        //         <Text>{user_post.comments[0].text}</Text>
-        //     </Flex>
-
-        // </Flex>
+        <Layout children={
+            <Flex direction={"column"} gap={"3rem"} maxW={"35rem"} p={"10px"}>
+                {is_loading ?
+                    <Text>LOADING</Text>
+                    :
+                    <>
+                        <Post {...user_post} />
+                        <AddComment user_post={user_post} />
+                        <Flex direction={"column"} gap={5}>
+                            {user_post.comments.map(each_comment => <Comment key={each_comment._id} {...each_comment} />)}
+                        </Flex>
+                    </>
+                }
+            </Flex>
+        } />
     )
 }
 
