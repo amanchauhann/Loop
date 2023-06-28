@@ -9,7 +9,7 @@ const Nav = () => {
         setSearch_value(e.target.value);
     }
     return (
-        <nav className="navigation" style={divider_border}>
+        <nav className="navigation" style={{ ...divider_border, position: "sticky", top: 0, zIndex: 1 }}>
             <div className="nav_logo">Loop</div>
 
             <Link to={"/mockman"}>
