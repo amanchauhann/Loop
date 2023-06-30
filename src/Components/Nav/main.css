@@ -19,3 +19,20 @@
     outline: none;
     border: 1px solid grey;
 }
+
+.suggestions {
+    display: none;
+}
+
+/* .suggestion_active {
+    display: block;
+} */
+
+.search_container:has(input:focus) .suggestions,
+.suggestions {
+    display: block;
+}
+
+/* .suggestions:active {
+    display: block;
+} */
