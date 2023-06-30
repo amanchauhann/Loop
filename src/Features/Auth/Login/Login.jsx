@@ -16,7 +16,8 @@ const Login = () => {
         password: ""
     })
     const [showBeat, setShowBeat] = useState(true);
-    const [title, set_title] = useState("LOOP")
+    const [title, set_title] = useState("LOOP");
+    const [password_type, set_password_type] = useState("password")
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -81,6 +82,10 @@ const Login = () => {
     }, []);
     const only_large = useBreakpointValue({ base: false, md: true });
 
+    const password_visibility_handler = (e) => {
+        const { checked } = e.target
+        set_password_type(checked ? "text" : "password")
+    }
 
     return (
         <Flex align={"center"} h={"100vh"} p={"5rem"} overflow={"hidden"} justify={"center"}>
@@ -119,10 +124,20 @@ const Login = () => {
                                             name="password"
                                             id={"login_password"}
                                             placeholder={"Enter Password"}
-                                            type={"password"}
+                                            type={password_type}
                                             onChange={creds_handler}
                                             value={loginform.password}
                                         />
+                                        <Box>
+                                            <label>
+                                                <input type="checkbox"
+                                                    onClick={password_visibility_handler}
+                                                />
+                                                show password
+                                            </label>
+                                        </Box>
+
+
                                     </FormLabel>
                                     <Flex direction={"column"} gap={"15px"}>
                                         <Button

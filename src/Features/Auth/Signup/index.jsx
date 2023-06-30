@@ -11,6 +11,7 @@ const Signup = ({ set_show_login }) => {
         username: "",
         password: ""
     })
+    const [password_type, set_password_type] = useState("password")
     const { signup, login, userData: { logged } } = useAuth()
 
     const navigate = useNavigate()
@@ -23,13 +24,17 @@ const Signup = ({ set_show_login }) => {
 
     const signup_handler = (e) => {
         e.preventDefault()
-        console.log("aman")
         signup(signup_form)
     }
 
     useEffect(() => {
         logged && navigate(location?.state?.from?.pathname);
     }, [logged])
+
+    const password_visibility_handler = (e) => {
+        const { checked } = e.target
+        set_password_type(checked ? "text" : "password")
+    }
 
     return (
         <Box>
@@ -78,9 +83,15 @@ const Signup = ({ set_show_login }) => {
                                 name="password"
                                 id={"password"}
                                 placeholder={"Enter Password"}
-                                type={"password"}
+                                type={password_type}
                             />
                         </FormLabel>
+                        <label>
+                            <input type="checkbox"
+                                onClick={password_visibility_handler}
+                            />
+                            show password
+                        </label>
                         <Button
                             type="submit"
                             p={"10px"}
