@@ -76,3 +76,7 @@
 .stop-beat {
   animation-play-state: paused;
 }
+
+.current_color:hover {
+  color: currentColor;
+}
