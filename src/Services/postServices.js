@@ -15,9 +15,7 @@ export const getSpecificUserPostsService = (username) => {
 export const getAddPostService = (post, encoded_token) => {
     return axios.post("/api/posts",
         {
-            postData: {
-                content: post
-            }
+            postData: post
         },
         {
             headers: {

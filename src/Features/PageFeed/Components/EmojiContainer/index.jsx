@@ -13,24 +13,16 @@ import {
     Flex,
     Box,
 } from "@chakra-ui/react";
-//   import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { emojis } from "../../../../utils";
 
-function EmojiContainer({ set_content }) {
+function EmojiContainer({ set_post_content }) {
     const { onClose, isOpen, onOpen } = useDisclosure();
 
     return (
         <Box>
             <Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
                 <PopoverTrigger>
-                    {/* <Button
-                        variant="iconButton"
-                    // color={useColorModeValue("gray.800", "white.900")}
-                    // paddingBottom="0"
-                    // pt="0.8rem"
-                    > */}
                     <i className="fa-solid fa-face-smile fa-lg"></i>
-                    {/* </Button> */}
                 </PopoverTrigger>
                 <PopoverContent>
                     <PopoverArrow />
@@ -43,7 +35,7 @@ function EmojiContainer({ set_content }) {
                             {emojis.map((emoji, index) => (
                                 <Button
                                     key={index}
-                                    onClick={() => set_content((content) => content + emoji)}
+                                    onClick={() => set_post_content((prev) => ({ ...prev, content: prev.content + emoji }))}
                                 >
                                     {emoji}
                                 </Button>

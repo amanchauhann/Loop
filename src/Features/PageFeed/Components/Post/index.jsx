@@ -15,7 +15,7 @@ import { useDisclosure } from "@chakra-ui/react"
 import EditModal from "./EditModal"
 import { getSpecificUserService } from "../../../../Services/userServices"
 
-const Post = ({ _id, username, content, likes, createdAt }) => {
+const Post = ({ _id, username, content, likes, media, createdAt }) => {
     const { allUsers: { users } } = useUsers()
     const { authDispacth, userData: { user: { user_details, encoded_token } } } = useAuth()
     const { postsDispatch, allPosts: { posts } } = usePosts()
@@ -147,7 +147,7 @@ const Post = ({ _id, username, content, likes, createdAt }) => {
                         {content}
                     </Text>
                 </Link>
-
+                {media && <img src={media} />}
                 <Divider />
                 <Flex>
                     {likes?.likedBy.find(({ _id }) => _id === user_details._id) ?
