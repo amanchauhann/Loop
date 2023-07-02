@@ -38,7 +38,6 @@ const AddPost = () => {
     }
 
     const onUploadClick = async (e) => {
-        console.log()
         const selected_file = e.target.files[0]
         if (selected_file) {
             try {
