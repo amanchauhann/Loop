@@ -20,7 +20,7 @@ const PageFeed = () => {
 
     useEffect(() => {
         const posts_for_feed = posts?.filter(eachPost => eachPost.username === user_details.username || user_details.following.find(({ username }) => username === eachPost.username))
-        postsDispatch({ type: "ADD_TO_FEED", payload: posts_for_feed })
+        postsDispatch({ type: "ADD_TO_FEED", payload: posts_for_feed.reverse() })
 
         // when user does any action like liking or bookmarking, this is to set the sort functionality again.
         postsDispatch({ type: POSTS.SET_SORT, payload: selected_button })
