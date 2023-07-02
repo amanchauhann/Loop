@@ -67,12 +67,6 @@ const Login = () => {
     const alphabets = "abcdefghijklmnopqrstuvwxyz"
     useEffect(() => {
         handleMouseOver()
-        // const titleElement = document.getElementById("title");
-        // titleElement.addEventListener("mouseover", handleMouseOver);
-
-        // return () => {
-        //     titleElement.removeEventListener("mouseover", handleMouseOver);
-        // };
     }, []);
 
     useEffect(() => {
@@ -136,8 +130,6 @@ const Login = () => {
                                                 show password
                                             </label>
                                         </Box>
-
-
                                     </FormLabel>
                                     <Flex direction={"column"} gap={"15px"}>
                                         <Button

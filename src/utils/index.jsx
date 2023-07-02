@@ -21,10 +21,6 @@ export const emojis = [
     "🥳",
 ];
 
-// export const upload_image = (img) => {
-
-// }
-
 export const upload_image = async (mediaNewPost) => {
     const dataForCloudinary = new FormData();
     dataForCloudinary.append("file", mediaNewPost);

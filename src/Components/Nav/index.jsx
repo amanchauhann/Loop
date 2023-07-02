@@ -38,11 +38,6 @@ const Nav = () => {
     return (
         <nav className="navigation" style={{ ...divider_border, position: "sticky", top: 0, zIndex: 1 }}>
             <Link to={"/"} className="current_color">Loop</Link>
-
-            {/* <Link to={"/mockman"}>
-                Mockman
-            </Link> */}
-
             <Box position={"relative"} className="search_container">
                 <input
                     className="search_bar"
@@ -62,8 +57,6 @@ const Nav = () => {
                                         <Text fontSize={"sm"}>{each_suggestion?.firstName} {each_suggestion?.lastName}</Text>
                                         <Text fontSize={"sm"}>@{each_suggestion?.username}</Text>
                                     </Box>
-
-
                                 </Flex>  </Link>) : <Text>No user found</Text>}
                     </Box>
                 }

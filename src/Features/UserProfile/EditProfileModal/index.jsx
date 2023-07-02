@@ -56,7 +56,6 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
                                     />)}
                                 </Flex>
 
-
                             </Box>
                             <Flex gap={14}>
                                 <Text>Bio: </Text>
@@ -77,8 +76,6 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
                                 />
                             </Flex>
                         </Flex>
-
-
                     </ModalBody>
 
                     <ModalFooter>

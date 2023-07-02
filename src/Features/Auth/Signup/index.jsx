@@ -112,7 +112,6 @@ const Signup = ({ set_show_login }) => {
                 m={"10px"}
                 p={"10px"}
                 color={"currentcolor"}
-                // border={"1px solid grey"}
                 _hover={{ textDecoration: "underline", cursor: "pointer" }}
                 transition={"0.7s"}
                 onClick={() => set_show_login(true)}

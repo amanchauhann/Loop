@@ -107,8 +107,6 @@ const UserProfile = () => {
                                                         <i onClick={logout_handler} className="fa-solid fa-right-from-bracket fa-lg pointer_cursor"></i>
                                                     </Tooltip>
                                                 </>
-
-
                                                 :
                                                 user_details?.following?.find(each_following => each_following._id === _id) ?
                                                     <Button
@@ -133,10 +131,7 @@ const UserProfile = () => {
                                                         Follow
                                                     </Button>
                                             }
-
                                         </Flex>
-
-
                                     </Flex>
                                     <Text>{bio}</Text>
                                     <Link href={website} fontSize={"sm"} isExternal>{website}</Link>
@@ -152,13 +147,10 @@ const UserProfile = () => {
                                 :
                                 <Text align={"center"} fontSize={"lg"}>No Posts.</Text>
                             }
-
                         </Flex >
                     </Box>
-
                 }
             />
-
             {!is_loading && <EditProfileModal isOpen={isOpen} onClose={onClose} {...user_profile} />}
         </>
     )

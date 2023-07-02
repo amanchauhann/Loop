@@ -54,45 +54,7 @@ const AddPost = () => {
         }
     }
 
-    const uploadImage = async (image) => {
-        if (Math.round(image.size / 1024000) > 2) {
-            console.error("img should be less than 2mb")
-        } else {
-            const data = new FormData();
-            data.append("file", image);
-            data.append("upload_preset", import.meta.env.VITE_JWT_SECRET)
-        }
-        const res = await axios.post("")
-    }
-
-    // const uploadImage = async (image) => {
-    //     if (Math.round(image.size / 1024000) > 2)
-    //       toast.error("File size should be less than 2MB");
-    //     else {
-    //       const data = new FormData();
-    //       data.append("file", image);
-    //       data.append("upload_preset", process.env.REACT_APP_CLOUDINARY_API_KEY);
-    //       const requestOptions = {
-    //         method: "POST",
-    //         body: data,
-    //       };
-    //       await fetch(
-    //         "https://api.cloudinary.com/v1_1/dtrjdcrme/image/upload",
-    //         requestOptions
-    //       )
-    //         .then((response) => response.json())
-    //         .then((json) => {
-    //           setAvatarUrl(json.secure_url);
-    //         })
-    //         .catch((error) => {
-    //           console.error(error);
-    //           toast.error("Image Uploading failed");
-    //         });
-    //     }
-    //   };
-
     return (
-        // <div className="add_post_container">
         <Flex style={divider_border} p={"1rem"} h={"fit-content"} direction={"column"} gap={"1rem"}>
             <Flex gap={"1rem"} align={"center"}>
                 <Image
@@ -129,7 +91,6 @@ const AddPost = () => {
                 <button className="post_btn" onClick={add_post_handler} disabled={post_content.content.length || post_content.media.length ? false : true}>POST</button>
             </Flex>
         </Flex>
-        // </div>
     )
 }
 

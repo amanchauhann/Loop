@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
             const { data, status } = await getSignupService(credentials)
             if (status === 201)
                 authDispacth({ type: AUTH.SIGNUP, payload: data })
-            // console.log("signup", res)
         } catch (e) {
             console.error("from signup", e)
         }
