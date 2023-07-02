@@ -4,6 +4,7 @@ import { getUserEditService } from "../../../Services/userServices"
 import { useAuth } from "../../../Contexts/AuthProvider"
 import { AUTH } from "../../../Common/reducerTypes"
 import { base, robots_data } from "../../../Common/robots"
+import { upload_image } from "../../../utils"
 
 const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
     const [update_bio, set_update_bio] = useState({
@@ -12,6 +13,7 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
         website: website,
     })
     const [selected_index, set_selected_index] = useState(null)
+    const [post_uploading, set_post_uploading] = useState(false)
 
     const { userData: { user: { user_details, encoded_token } }, authDispacth } = useAuth()
 
@@ -29,6 +31,21 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
         }
         update_profile()
     }
+    const onUploadClick = async (e) => {
+        const selected_file = e.target.files[0]
+        if (selected_file) {
+            try {
+                set_post_uploading(true)
+                const img_url = await upload_image(selected_file)
+                if (img_url) {
+                    set_update_bio(prev => ({ ...prev, displayImg: img_url.url }))
+                    set_post_uploading(false)
+                }
+            } catch (e) {
+                console.error("from onUploadClick", e)
+            }
+        }
+    }
 
     return (
         <>
@@ -39,7 +56,11 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <Flex direction={"column"} gap={5}>
-                            <Avatar src={displayImg} />
+                            <Avatar src={update_bio.displayImg} />
+                            <label> Upload Picture or choose Avatar
+                                <input onChange={onUploadClick} type="file" />
+                            </label>
+                            {post_uploading && <Text>uploading...</Text>}
                             <Box>
                                 <Text>Choose Avatar:</Text>
                                 <Flex justify={"space-between"}>
