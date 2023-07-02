@@ -9,11 +9,12 @@ import Layout from "../../Layout";
 
 const Explore = () => {
     const { allPosts: { posts } } = usePosts()
+    const reversedPosts = [...posts].reverse();
     return (
         <>
             <Layout children={
                 <Box w={"35rem"}>
-                    <PostsLayout children={posts.map(eachPost => <Post key={eachPost._id} {...eachPost} />)} />
+                    <PostsLayout children={reversedPosts.map(eachPost => <Post key={eachPost._id} {...eachPost} />)} />
                 </Box>
 
             } />
