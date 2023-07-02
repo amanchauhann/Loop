@@ -31,7 +31,7 @@ const Nav = () => {
         clearTimeout(timeout_ref.current)
         timeout_ref.current = setTimeout(async () => {
             const all_users = await fetch_users()
-            set_suggestions(all_users.users.filter(({ firstName }) => firstName.toLowerCase().includes(value)))
+            set_suggestions(all_users.users.filter(({ firstName }) => firstName.toLowerCase().trim().includes(value.toLowerCase())))
         }, 500);
     }
 
@@ -52,7 +52,7 @@ const Nav = () => {
                             <Link to={`/profile/${each_suggestion.username}`} className="current_color" key={each_suggestion._id}>
                                 <Flex style={divider_border} p={2} gap={2}>
 
-                                    <Avatar src={each_suggestion?.displayImg} size={"md"} />
+                                    <Avatar name={`${each_suggestion.firstName} ${each_suggestion.lastName}`} src={each_suggestion?.displayImg} size={"md"} />
                                     <Box>
                                         <Text fontSize={"sm"}>{each_suggestion?.firstName} {each_suggestion?.lastName}</Text>
                                         <Text fontSize={"sm"}>@{each_suggestion?.username}</Text>
@@ -62,7 +62,7 @@ const Nav = () => {
                 }
             </Box>
             <Link to={`/profile/${user_details.username}`}>
-                <Avatar src={user_details.displayImg} />
+                <Avatar bg={"cyan"} name={`${user_details.firstName} ${user_details.lastName}`} src={user_details.displayImg} />
             </Link>
 
         </nav>
