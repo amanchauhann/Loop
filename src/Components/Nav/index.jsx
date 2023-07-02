@@ -7,7 +7,7 @@ import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 import { useAuth } from "../../Contexts/AuthProvider";
 
 const Nav = () => {
-    const [search_value, setSearch_value] = useState("");
+    const [search_value, set_search_value] = useState("");
     const [suggestions, set_suggestions] = useState([])
 
     const { userData: { user: { user_details, encoded_token } } } = useAuth()
@@ -27,7 +27,7 @@ const Nav = () => {
     const timeout_ref = useRef(null)
     const search_value_handler = (e) => {
         const { value } = e.target
-        setSearch_value(value);
+        set_search_value(value);
         clearTimeout(timeout_ref.current)
         timeout_ref.current = setTimeout(async () => {
             const all_users = await fetch_users()
@@ -54,8 +54,8 @@ const Nav = () => {
                 {search_value.length > 0 &&
                     <Box style={divider_border} bg={"rgb(23, 24, 34)"} color={"currentcolor"} position={"absolute"} w={'100%'} className={`suggestions`}>
                         {suggestions.length > 0 ? suggestions?.map(each_suggestion =>
-                            <Link to={`/profile/${each_suggestion.username}`} className="current_color">
-                                <Flex style={divider_border} p={2} gap={2} key={each_suggestion._id}>
+                            <Link to={`/profile/${each_suggestion.username}`} className="current_color" key={each_suggestion._id}>
+                                <Flex style={divider_border} p={2} gap={2}>
 
                                     <Avatar src={each_suggestion?.displayImg} size={"md"} />
                                     <Box>
