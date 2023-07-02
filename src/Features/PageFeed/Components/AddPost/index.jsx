@@ -52,7 +52,6 @@ const AddPost = () => {
             }
         }
     }
-    console.log(`${firstName} ${lastName}`)
 
     return (
         <Flex style={divider_border} p={"1rem"} h={"fit-content"} direction={"column"} gap={"1rem"}>
@@ -61,12 +60,6 @@ const AddPost = () => {
                     src={displayImg}
                     name={`${firstName} ${lastName}`}
                 />
-                {/* <Image
-                    borderRadius='full'
-                    boxSize='45px'
-                    src={displayImg}
-                    alt={`${firstName} ${lastName}`}
-                /> */}
                 <input value={post_content.content} onChange={(e) => set_post_content((prev) => ({ ...prev, content: e.target.value }))} className="add_post_input" type="text" />
             </Flex>
             {post_uploading && <h2>UPLOADING MEDIA...</h2>}

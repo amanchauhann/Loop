@@ -30,6 +30,7 @@ const PageFeed = () => {
         postsDispatch({ type: POSTS.SET_SORT, payload: e.target.value })
         set_selected_button(e.target.value)
     }
+
     return (
         <>
             <Layout children={
