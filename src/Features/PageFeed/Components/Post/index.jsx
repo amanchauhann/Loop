@@ -15,7 +15,7 @@ import { useDisclosure } from "@chakra-ui/react"
 import EditModal from "./EditModal"
 import { getSpecificUserService } from "../../../../Services/userServices"
 
-const Post = ({ _id, username, content, likes, media, createdAt }) => {
+const Post = ({ _id, username, content, likes, comments, media, createdAt }) => {
     const { allUsers: { users } } = useUsers()
     const { authDispacth, userData: { user: { user_details, encoded_token } } } = useAuth()
     const { postsDispatch, allPosts: { posts } } = usePosts()
@@ -141,7 +141,6 @@ const Post = ({ _id, username, content, likes, media, createdAt }) => {
                         </MenuList>
                     </Menu>}
                 </Flex>
-                {/* <Divider /> */}
                 <Link to={`/post/${_id}`}>
                     <Text fontSize={"sm"}>
                         {content}
@@ -151,16 +150,20 @@ const Post = ({ _id, username, content, likes, media, createdAt }) => {
                 <Divider />
                 <Flex>
                     {likes?.likedBy.find(({ _id }) => _id === user_details._id) ?
-                        <div className="post_icon" onClick={() => like_handler(getDislikePostService, _id, encoded_token)}>
+                        <div className="post_icon cursor_pointer" onClick={() => like_handler(getDislikePostService, _id, encoded_token)}>
                             <i className="fa-solid fa-thumbs-up fa-xl"><span className="sm-text">{likes.likeCount}</span></i>
                         </div>
                         :
-                        <div className="post_icon" onClick={() => like_handler(getLikePostService, _id, encoded_token)}>
+                        <div className="post_icon cursor_pointer" onClick={() => like_handler(getLikePostService, _id, encoded_token)}>
+
                             <i className="fa-regular fa-thumbs-up fa-lg"><span className="sm-text">{likes.likeCount}</span></i>
                         </div>
                     }
                     <div className="post_icon">
-                        <i className="fa-regular fa-message fa-lg"></i>
+                        <Link to={`/post/${_id}`} className="current_color">
+                            <i className="fa-regular fa-message fa-lg"><span className="sm-text">{comments.length}</span></i>
+                        </Link>
+
                     </div>
                     {user_details.bookmarks.find(each_bookmark_ID => each_bookmark_ID === _id) ?
                         <div className="post_icon" onClick={() => bookmark_handler(getRemoveBookmarkService, _id, encoded_token)}>

@@ -25,6 +25,7 @@ import {
   unfollowUserHandler,
   editUserHandler,
 } from "./backend/controllers/UserController";
+import { addPostCommentHandler, deletePostCommentHandler, downvotePostCommentHandler, editPostCommentHandler, getPostCommentsHandler, upvotePostCommentHandler } from "./backend/controllers/CommentsController";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -89,6 +90,28 @@ export function makeServer({ environment = "development" } = {}) {
       );
       this.passthrough(
         "https://api.cloudinary.com/v1_1/dojsq93dk/image/upload"
+      );
+
+      //post comments routes (public)
+      this.get("/comments/:postId", getPostCommentsHandler.bind(this));
+
+      //post comments routes (private)
+      this.post("/comments/add/:postId", addPostCommentHandler.bind(this));
+      this.post(
+        "/comments/edit/:postId/:commentId",
+        editPostCommentHandler.bind(this)
+      );
+      this.delete(
+        "/comments/delete/:postId/:commentId",
+        deletePostCommentHandler.bind(this)
+      );
+      this.post(
+        "/comments/upvote/:postId/:commentId",
+        upvotePostCommentHandler.bind(this)
+      );
+      this.post(
+        "/comments/downvote/:postId/:commentId",
+        downvotePostCommentHandler.bind(this)
       );
     },
   });

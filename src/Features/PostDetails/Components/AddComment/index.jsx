@@ -6,10 +6,24 @@ import { useAuth } from "../../../../Contexts/AuthProvider"
 import { usePosts } from "../../../../Contexts/PostsProvider"
 import { POSTS } from "../../../../Common/reducerTypes"
 import { v4 as uuid } from "uuid";
+import { getAddCommentService } from "../../../../Services/commentServices"
 
-const AddComment = () => {
-    const [content, set_content] = useState("")
-    const { userData: { user: { user_details: { firstName, lastName, displayImg } } } } = useAuth()
+const AddComment = ({ _id }) => {
+    const [add_comment, set_add_comment] = useState("")
+    const { userData: { user: { user_details: { firstName, lastName, displayImg }, encoded_token } } } = useAuth()
+    const { postsDispatch } = usePosts()
+
+    const add_comment_handler = async () => {
+        try {
+            const { data, status } = await getAddCommentService(_id, add_comment, encoded_token)
+            if (status === 201) {
+                postsDispatch({ type: POSTS.INITIALISE, payload: data.posts })
+                set_add_comment("")
+            }
+        } catch (e) {
+            console.error("from AddComment", e)
+        }
+    }
 
     return (
         <Flex style={divider_border} p={"1rem"} h={"fit-content"} direction={"column"} gap={"1rem"}>
@@ -18,21 +32,9 @@ const AddComment = () => {
                     src={displayImg}
                     name={`${firstName} ${lastName}`}
                 />
-                {/* <Image
-                    borderRadius='full'
-                    boxSize='45px'
-                    src={displayImg}
-                    alt={displayImg}
-                /> */}
-                <input value={content} onChange={(e) => set_content(e.target.value)} className="add_post_input" type="text" />
+                <input value={add_comment} onChange={(e) => set_add_comment(e.target.value)} className="add_post_input" type="text" />
             </Flex>
-            <Flex justify={"space-between"} align={"center"}>
-                <Flex gap={"1rem"} align={"center"}>
-                    <i className="fa-regular fa-image fa-lg"></i>
-                    <EmojiContainer set_content={set_content} />
-                </Flex>
-                <button className="post_btn" disabled={content.length ? false : true}>Comment</button>
-            </Flex>
+            <button style={{ alignSelf: "flex-end", padding: "8px" }} className="post_btn" onClick={add_comment_handler} disabled={add_comment.length ? false : true}>Comment</button>
         </Flex>
     )
 }

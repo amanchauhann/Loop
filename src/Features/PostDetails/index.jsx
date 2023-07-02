@@ -3,18 +3,20 @@ import { useParams } from "react-router-dom"
 import { getSpecificPost } from "../../Services/postServices"
 import { useState } from "react"
 import Post from "../PageFeed/Components/Post"
-import { Avatar, Box, Flex, Text } from "@chakra-ui/react"
+import { Avatar, Box, Flex, Heading, Text } from "@chakra-ui/react"
 import { divider_border } from "../../Styles/Global"
 import Comment from "./Components/Comment"
 import AddComment from "./Components/AddComment"
 import { usePosts } from "../../Contexts/PostsProvider"
 import Layout from "../../Layout"
+import { getCommentsOnPost } from "../../Services/commentServices"
 
 const PostDetails = () => {
     const { post_id } = useParams()
     const { postsDispatch, allPosts: { posts, feedPosts } } = usePosts()
-    const [user_post, set_user_post] = useState()
+    const [user_post, set_user_post] = useState({})
     const [is_loading, set_is_loading] = useState(true)
+    const [post_comments, set_post_comments] = useState([])
 
     useEffect(() => {
         const fetch_specific_post = async () => {
@@ -31,6 +33,22 @@ const PostDetails = () => {
         fetch_specific_post()
     }, [posts])
 
+    useEffect(() => {
+        const fetching_comment = async () => {
+            try {
+                if (user_post._id) {
+                    const { data: { comments }, status } = await getCommentsOnPost(user_post?._id)
+                    if (status === 200) {
+                        set_post_comments(comments)
+                    }
+                }
+            } catch (e) {
+                console.error("from postDetail_ fetchingComment", e)
+            }
+        }
+        fetching_comment()
+    }, [user_post])
+
     return (
         <Layout
             is_loading={is_loading}
@@ -38,10 +56,14 @@ const PostDetails = () => {
                 <Flex direction={"column"} gap={"3rem"} maxW={"35rem"} p={"10px"}>
                     <>
                         <Post {...user_post} />
-                        <AddComment user_post={user_post} />
-                        <Flex direction={"column"} gap={5}>
-                            {user_post?.comments?.map(each_comment => <Comment key={each_comment._id} {...each_comment} />)}
-                        </Flex>
+                        <AddComment _id={post_id} />
+                        <Box>
+                            <Text pb={2} fontSize={"2xl"} fontWeight={700}>{post_comments.length ? "Comments:" : "No Comments"}</Text>
+                            <Flex direction={"column"} gap={5}>
+                                {post_comments?.map(each_comment => <Comment key={each_comment._id} {...each_comment} />)}
+                            </Flex>
+                        </Box>
+
                     </>
                 </Flex>
             } />
