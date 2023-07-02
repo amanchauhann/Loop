@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import Nav from "../../Components/Nav";
 import { usePosts } from "../../Contexts/PostsProvider";
 import Post from "../PageFeed/Components/Post";
@@ -11,7 +11,12 @@ const Explore = () => {
     const { allPosts: { posts } } = usePosts()
     return (
         <>
-            <Layout children={<PostsLayout children={posts.map(eachPost => <Post key={eachPost._id} {...eachPost} />)} />} />
+            <Layout children={
+                <Box w={"35rem"}>
+                    <PostsLayout children={posts.map(eachPost => <Post key={eachPost._id} {...eachPost} />)} />
+                </Box>
+
+            } />
         </>
     )
 }

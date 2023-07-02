@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useAuth } from "../../Contexts/AuthProvider"
 import { getBookmarkService } from "../../Services/postServices"
 import { usePosts } from "../../Contexts/PostsProvider"
-import { Heading } from "@chakra-ui/react"
+import { Box, Heading } from "@chakra-ui/react"
 import Post from "../PageFeed/Components/Post"
 import Layout from "../../Layout"
 import PostsLayout from "../../Layout/PostsLayout"
@@ -18,8 +18,10 @@ const Bookmarks = () => {
 
 
     const bookmark_feed = bookmarked_posts.length > 0 ?
-        <PostsLayout children={bookmarked_posts.map(each_bookmarked =>
-            <Post key={each_bookmarked._id} {...each_bookmarked} />)} />
+        <Box w={"35rem"}>
+            <PostsLayout children={bookmarked_posts.map(each_bookmarked =>
+                <Post key={each_bookmarked._id} {...each_bookmarked} />)} />
+        </Box>
         :
         <Heading size="lg" mt="16" w={"35rem"} textAlign={"center"}>
             No Bookmarks Yet

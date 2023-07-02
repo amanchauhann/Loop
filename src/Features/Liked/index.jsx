@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { usePosts } from "../../Contexts/PostsProvider"
 import { useAuth } from "../../Contexts/AuthProvider"
 import Post from "../PageFeed/Components/Post"
-import { Heading } from "@chakra-ui/react"
+import { Box, Heading } from "@chakra-ui/react"
 import PostsLayout from "../../Layout/PostsLayout"
 import Layout from "../../Layout"
 
@@ -18,8 +18,11 @@ const Liked = () => {
     return (
         <>
             <Layout children={liked_by_user.length > 0 ?
-                <PostsLayout children={liked_by_user.map(each_liked =>
-                    <Post key={each_liked._id} {...each_liked} />)} />
+                <Box w={"35rem"}>
+                    <PostsLayout children={liked_by_user.map(each_liked =>
+                        <Post key={each_liked._id} {...each_liked} />)} />
+                </Box>
+
                 :
                 <Heading size="lg" mt="16" w={"35rem"} textAlign={"center"}>
                     No Liked Posts Yet
