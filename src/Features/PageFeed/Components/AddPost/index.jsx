@@ -8,7 +8,7 @@ import { useAuth } from "../../../../Contexts/AuthProvider";
 import { getAddPostService } from "../../../../Services/postServices";
 import { usePosts } from "../../../../Contexts/PostsProvider";
 import { POSTS } from "../../../../Common/reducerTypes";
-import { Input } from "@chakra-ui/react";
+import { Avatar, Input } from "@chakra-ui/react";
 import { upload_image } from "../../../../utils";
 
 const AddPost = () => {
@@ -17,7 +17,7 @@ const AddPost = () => {
         media: ""
     })
     const [post_uploading, set_post_uploading] = useState(false)
-    const { userData: { user: { user_details: { displayImg }, encoded_token } } } = useAuth()
+    const { userData: { user: { user_details: { firstName, lastName, displayImg }, encoded_token } } } = useAuth()
     const { postsDispatch, allPosts: { posts, feedPosts } } = usePosts()
 
     const add_post_handler = () => {
@@ -52,16 +52,21 @@ const AddPost = () => {
             }
         }
     }
+    console.log(`${firstName} ${lastName}`)
 
     return (
         <Flex style={divider_border} p={"1rem"} h={"fit-content"} direction={"column"} gap={"1rem"}>
             <Flex gap={"1rem"} align={"center"}>
-                <Image
+                <Avatar
+                    src={displayImg}
+                    name={`${firstName} ${lastName}`}
+                />
+                {/* <Image
                     borderRadius='full'
                     boxSize='45px'
                     src={displayImg}
-                    alt={displayImg}
-                />
+                    alt={`${firstName} ${lastName}`}
+                /> */}
                 <input value={post_content.content} onChange={(e) => set_post_content((prev) => ({ ...prev, content: e.target.value }))} className="add_post_input" type="text" />
             </Flex>
             {post_uploading && <h2>UPLOADING MEDIA...</h2>}
