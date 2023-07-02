@@ -61,6 +61,10 @@ const Nav = () => {
                     </Box>
                 }
             </Box>
+            <Link to={`/profile/${user_details.username}`}>
+                <Avatar src={user_details.displayImg} />
+            </Link>
+
         </nav>
     )
 }
