@@ -136,7 +136,7 @@ const UserProfile = () => {
                                     <Text>{bio}</Text>
                                     <Link href={website} fontSize={"sm"} isExternal>{website}</Link>
                                     <Flex gap={4} justify={"space-between"}>
-                                        <Text>3 posts</Text>
+                                        <Text>{user_posts?.length} posts</Text>
                                         <Text>{followers?.length} followers</Text>
                                         <Text>{following?.length} following</Text>
                                     </Flex>
