@@ -27,3 +27,7 @@
     background: var(--secondary-color);
     border: 2px solid var(--primary-color);
 }
+
+.post_btn:disabled {
+    cursor: not-allowed;
+}
