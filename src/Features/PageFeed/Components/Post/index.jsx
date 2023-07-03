@@ -151,17 +151,17 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
                 <Flex>
                     {likes?.likedBy.find(({ _id }) => _id === user_details._id) ?
                         <div className="post_icon cursor_pointer" onClick={() => like_handler(getDislikePostService, _id, encoded_token)}>
-                            <i className="fa-solid fa-thumbs-up fa-xl"><span className="sm-text">{likes.likeCount}</span></i>
+                            <i className="fa-solid fa-thumbs-up fa-xl"><span className="sm-text">{likes?.likeCount}</span></i>
                         </div>
                         :
                         <div className="post_icon cursor_pointer" onClick={() => like_handler(getLikePostService, _id, encoded_token)}>
 
-                            <i className="fa-regular fa-thumbs-up fa-lg"><span className="sm-text">{likes.likeCount}</span></i>
+                            <i className="fa-regular fa-thumbs-up fa-lg"><span className="sm-text">{likes?.likeCount}</span></i>
                         </div>
                     }
                     <div className="post_icon">
                         <Link to={`/post/${_id}`} className="current_color">
-                            <i className="fa-regular fa-message fa-lg"><span className="sm-text">{comments.length}</span></i>
+                            <i className="fa-regular fa-message fa-lg"><span className="sm-text">{comments?.length}</span></i>
                         </Link>
 
                     </div>
