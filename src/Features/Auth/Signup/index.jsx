@@ -85,13 +85,18 @@ const Signup = ({ set_show_login }) => {
                                 placeholder={"Enter Password"}
                                 type={password_type}
                             />
+                            <Flex justify={"flex-end"} gap={1} p={1}>
+                                <input type="checkbox" onClick={password_visibility_handler} />
+                                <Text>show Password</Text>
+                            </Flex>
+                            {/* <label style={{ textAlign: "right" }}>
+                                <input type="checkbox"
+                                    onClick={password_visibility_handler}
+                                />
+                                show password
+                            </label> */}
                         </FormLabel>
-                        <label>
-                            <input type="checkbox"
-                                onClick={password_visibility_handler}
-                            />
-                            show password
-                        </label>
+
                         <Button
                             type="submit"
                             p={"10px"}

@@ -4,11 +4,10 @@ import { useAuth } from "../../../Contexts/AuthProvider"
 import { useLocation, useNavigate } from "react-router-dom"
 import Signup from "../Signup"
 import { divider_border } from "../../../Styles/Global"
-import React, { lazy, Suspense } from "react";
+import React from "react";
 
 
 const Login = () => {
-    const LazySignup = lazy(() => import("../Signup"));
     const { signup, login, userData: { logged } } = useAuth()
     const [show_login, set_show_login] = useState(true)
     const [loginform, setLoginForm] = useState({
@@ -122,14 +121,18 @@ const Login = () => {
                                             onChange={creds_handler}
                                             value={loginform.password}
                                         />
-                                        <Box>
+                                        <Flex justify={"flex-end"} gap={1} p={1}>
+                                            <input type="checkbox" onClick={password_visibility_handler} />
+                                            <Text>show Password</Text>
+                                        </Flex>
+                                        {/* <Box textAlign={"right"}>
                                             <label>
                                                 <input type="checkbox"
                                                     onClick={password_visibility_handler}
                                                 />
                                                 show password
                                             </label>
-                                        </Box>
+                                        </Box> */}
                                     </FormLabel>
                                     <Flex direction={"column"} gap={"15px"}>
                                         <Button
@@ -165,6 +168,7 @@ const Login = () => {
                                 color={"grey"}
                                 _hover={{ textDecoration: "underline" }}
                                 onClick={() => set_show_login(false)}
+                                p={1}
                             >
                                 Sign up here
                             </Text>
@@ -172,9 +176,7 @@ const Login = () => {
                     </Box>
                     :
                     <Box style={divider_border} transform={!show_login ? "rotate(360deg)" : "none"} transition={"2s"} p={3}>
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <LazySignup set_show_login={set_show_login} />
-                        </Suspense>
+                        <Signup set_show_login={set_show_login} />
                     </Box>
 
             }
