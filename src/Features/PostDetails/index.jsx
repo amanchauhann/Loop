@@ -58,7 +58,7 @@ const PostDetails = () => {
                         <Post {...user_post} />
                         <AddComment _id={post_id} />
                         <Box>
-                            <Text pb={2} fontSize={"2xl"} fontWeight={700}>{post_comments.length ? "Comments:" : "No Comments"}</Text>
+                            <Text pb={2} fontSize={"2xl"} fontWeight={700}>{post_comments?.length ? "Comments:" : "No Comments"}</Text>
                             <Flex direction={"column"} gap={5}>
                                 {post_comments?.map(each_comment => <Comment key={each_comment._id} {...each_comment} />)}
                             </Flex>
