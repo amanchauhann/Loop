@@ -9,6 +9,7 @@ import { useAuth } from "../../Contexts/AuthProvider";
 const Nav = () => {
     const [search_value, set_search_value] = useState("");
     const [suggestions, set_suggestions] = useState([])
+    const [searching_suggestions, set_searching_suggestions] = useState(false)
 
     const { userData: { user: { user_details, encoded_token } } } = useAuth()
 
@@ -16,6 +17,7 @@ const Nav = () => {
         try {
             const { data, status } = await getUsersService()
             if (status === 200) {
+                set_searching_suggestions(false)
                 return data
             }
         } catch (e) {
@@ -27,12 +29,16 @@ const Nav = () => {
     const timeout_ref = useRef(null)
     const search_value_handler = (e) => {
         const { value } = e.target
+        set_searching_suggestions(true)
         set_suggestions([])
         set_search_value(value);
         clearTimeout(timeout_ref.current)
         timeout_ref.current = setTimeout(async () => {
             const all_users = await fetch_users()
-            set_suggestions(all_users.users.filter(({ firstName }) => firstName.toLowerCase().trim().includes(value.toLowerCase())))
+            set_suggestions(all_users.users.filter(({ firstName, lastName }) => {
+                const name = `${firstName} ${lastName}`
+                return name.toLowerCase().trim().includes(value.toLowerCase().trim())
+            }))
         }, 500);
     }
 
@@ -49,7 +55,7 @@ const Nav = () => {
                 />
                 {search_value.length > 0 &&
                     <Box style={divider_border} bg={"rgb(23, 24, 34)"} color={"currentcolor"} position={"absolute"} w={'100%'} className={`suggestions`}>
-                        {suggestions.length > 0 ? suggestions?.map(each_suggestion =>
+                        {searching_suggestions ? <Text>LOADING</Text> : suggestions.length > 0 ? suggestions?.map(each_suggestion =>
                             <Link to={`/profile/${each_suggestion.username}`} className="current_color" key={each_suggestion._id}>
                                 <Flex style={divider_border} p={2} gap={2}>
 
