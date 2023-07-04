@@ -53,7 +53,7 @@ $ npm start
 -Mockbee for backend and Auth
 
 ## Live Link
-[Bakin Gram](https://bakingram.netlify.app/)
+[Loop](https://github.com/amanchauhann/Loop)
 
 ## Demo Video
 
