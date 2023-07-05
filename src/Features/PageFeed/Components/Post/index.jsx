@@ -11,7 +11,7 @@ import { AUTH, POSTS } from "../../../../Common/reducerTypes"
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 import { useState } from "react"
-import { useDisclosure } from "@chakra-ui/react"
+import { Avatar, useDisclosure } from "@chakra-ui/react"
 import EditModal from "./EditModal"
 import { getSpecificUserService } from "../../../../Services/userServices"
 
@@ -86,11 +86,9 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
                 <Flex justify={"space-between"}>
                     <Link to={`/profile/${username}`}>
                         <Flex gap={"10px"}>
-                            <Image
-                                borderRadius='full'
-                                boxSize='45px'
+                            <Avatar
                                 src={current_user?.displayImg}
-                                alt={`portrait of ${current_user?.firstName} ${current_user?.lastName}`}
+                                name={`${current_user?.firstName} ${current_user?.lastName}`}
                             />
                             <Flex direction={"column"}>
                                 <Text fontSize='md'>{`${current_user?.firstName} ${current_user?.lastName}`}</Text>
