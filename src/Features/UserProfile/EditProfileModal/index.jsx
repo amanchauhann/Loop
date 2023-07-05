@@ -6,7 +6,7 @@ import { AUTH } from "../../../Common/reducerTypes"
 import { base, robots_data } from "../../../Common/robots"
 import { upload_image } from "../../../utils"
 
-const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
+const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg, firstName, lastName }) => {
     const [update_bio, set_update_bio] = useState({
         displayImg: displayImg,
         bio: bio,
@@ -56,7 +56,10 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg }) => {
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <Flex direction={"column"} gap={5}>
-                            <Avatar src={update_bio.displayImg} />
+                            <Avatar
+                                src={update_bio?.displayImg}
+                                name={`${firstName} ${lastName}`}
+                            />
                             <label> Upload Picture or choose Avatar
                                 <input onChange={onUploadClick} type="file" />
                             </label>
