@@ -49,7 +49,6 @@ const Login = () => {
         let iterations = 0;
         const intervalID = setInterval(() => {
             set_title(title.split("").map((each_letter, i) => {
-                console.log(title.length)
                 if (i < iterations) {
                     return title[i]
                 }
