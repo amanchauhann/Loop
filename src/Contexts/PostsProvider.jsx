@@ -5,6 +5,7 @@ import { postsReducer } from "../Reducers/postsReducers";
 import { useEffect } from "react";
 import { getPostsService } from "../Services/postServices";
 import { useAuth } from "./AuthProvider";
+import { errorToast } from "../utils";
 
 const PostsContext = createContext()
 
@@ -27,6 +28,7 @@ export const PostsProvider = ({ children }) => {
                 }
             } catch (e) {
                 console.error("from PostsProvider", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         fetchPosts()

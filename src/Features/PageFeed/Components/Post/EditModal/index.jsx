@@ -3,6 +3,7 @@ import { useState } from "react"
 import { getEditPostService } from "../../../../../Services/postServices"
 import { usePosts } from "../../../../../Contexts/PostsProvider"
 import { POSTS } from "../../../../../Common/reducerTypes"
+import { errorToast } from "../../../../../utils"
 
 const EditModal = ({ isOpen, onClose, content, _id, encoded_token }) => {
     const { postsDispatch, allPosts: { posts, feedPosts } } = usePosts()
@@ -22,6 +23,7 @@ const EditModal = ({ isOpen, onClose, content, _id, encoded_token }) => {
 
             } catch (e) {
                 console.error("from editModal_editPost", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         edit_post()

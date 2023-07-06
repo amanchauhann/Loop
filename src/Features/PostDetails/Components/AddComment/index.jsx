@@ -7,6 +7,7 @@ import { usePosts } from "../../../../Contexts/PostsProvider"
 import { POSTS } from "../../../../Common/reducerTypes"
 import { v4 as uuid } from "uuid";
 import { getAddCommentService } from "../../../../Services/commentServices"
+import { errorToast } from "../../../../utils"
 
 const AddComment = ({ _id }) => {
     const [add_comment, set_add_comment] = useState("")
@@ -22,6 +23,7 @@ const AddComment = ({ _id }) => {
             }
         } catch (e) {
             console.error("from AddComment", e)
+            errorToast(`${e.status} there is some error`)
         }
     }
 

@@ -10,6 +10,7 @@ import AddComment from "./Components/AddComment"
 import { usePosts } from "../../Contexts/PostsProvider"
 import Layout from "../../Layout"
 import { getCommentsOnPost } from "../../Services/commentServices"
+import { errorToast } from "../../utils"
 
 const PostDetails = () => {
     const { post_id } = useParams()
@@ -44,6 +45,7 @@ const PostDetails = () => {
                 }
             } catch (e) {
                 console.error("from postDetail_ fetchingComment", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         fetching_comment()
@@ -53,7 +55,7 @@ const PostDetails = () => {
         <Layout
             is_loading={is_loading}
             children={
-                <Flex direction={"column"} gap={"3rem"} maxW={"35rem"} p={"10px"}>
+                <Flex direction={"column"} gap={"3rem"} p={"10px"}>
                     <>
                         <Post {...user_post} />
                         <AddComment _id={post_id} />

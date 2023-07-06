@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { createContext } from "react";
 import { usersReducers } from "../Reducers/usersReducers";
 import { getUsersService } from "../Services/userServices";
+import { errorToast } from "../utils";
 
 const UsersContext = createContext()
 
@@ -19,6 +20,7 @@ export const UsersProvider = ({ children }) => {
                 }
             } catch (e) {
                 console.error("error from UsersProvider", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         fetchUsers()

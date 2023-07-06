@@ -33,7 +33,7 @@ const AddPost = () => {
                 })
             } catch (e) {
                 console.error("from AddPost_handler", e)
-                errorToast(e.status, "there is some error")
+                errorToast(`${e.status} there is some error`)
             }
         }
         add_post()
@@ -51,6 +51,7 @@ const AddPost = () => {
                 }
             } catch (e) {
                 console.error("from onUploadClick", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
     }

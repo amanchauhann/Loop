@@ -14,7 +14,7 @@ import { useState } from "react"
 import { Avatar, useDisclosure } from "@chakra-ui/react"
 import EditModal from "./EditModal"
 import { getSpecificUserService } from "../../../../Services/userServices"
-import { darkRedToast } from "../../../../utils"
+import { darkRedToast, errorToast } from "../../../../utils"
 
 const Post = ({ _id, username, content, likes, comments, media, createdAt }) => {
     const { allUsers: { users } } = useUsers()
@@ -48,6 +48,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
                 }
             } catch (e) {
                 console.error("from post_deletehandler", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         delete_post()
@@ -62,6 +63,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
 
         } catch (e) {
             console.error("from like_Post", e)
+            errorToast(`${e.status} there is some error`)
         }
     }
 
@@ -73,6 +75,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
             }
         } catch (e) {
             console.error("from bookmark_Post", e)
+            errorToast(`${e.status} there is some error`)
         }
     }
 

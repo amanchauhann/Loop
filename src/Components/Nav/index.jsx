@@ -5,6 +5,7 @@ import { divider_border } from "../../Styles/Global";
 import { getUsersService } from "../../Services/userServices";
 import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 import { useAuth } from "../../Contexts/AuthProvider";
+import { errorToast } from "../../utils";
 
 const Nav = () => {
     const [search_value, set_search_value] = useState("");
@@ -22,6 +23,7 @@ const Nav = () => {
             }
         } catch (e) {
             console.error("from nav_fetch_users", e)
+            errorToast(`${e.status} there is some error`)
         }
     }
 

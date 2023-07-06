@@ -6,6 +6,7 @@ import { useState } from "react"
 import { useUsers } from "../../../../Contexts/UsersProvider"
 import { usePosts } from "../../../../Contexts/PostsProvider"
 import { Link } from "react-router-dom"
+import { errorToast } from "../../../../utils"
 
 const Comment = ({ username, text }) => {
     const [specific_user_profile, set_specific_user_profile] = useState({})
@@ -20,6 +21,7 @@ const Comment = ({ username, text }) => {
                 }
             } catch (e) {
                 console.error("from posts_getUser", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         get_this_user()

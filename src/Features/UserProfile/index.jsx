@@ -12,6 +12,7 @@ import { usePosts } from "../../Contexts/PostsProvider"
 import { useUsers } from "../../Contexts/UsersProvider"
 import EditProfileModal from "./EditProfileModal"
 import Layout from "../../Layout"
+import { darkSuccessToast, errorToast } from "../../utils"
 
 const UserProfile = () => {
     const { user_name } = useParams()
@@ -33,6 +34,7 @@ const UserProfile = () => {
                 }
             } catch (e) {
                 console.error("from userProfile_getSingleUser", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         set_is_logged_user(user_details.username === user_name ? true : false)
@@ -49,6 +51,7 @@ const UserProfile = () => {
                 }
             } catch (e) {
                 console.error("from userProfile_followUnfollowHandler", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         follow_user()
@@ -64,6 +67,7 @@ const UserProfile = () => {
                 }
             } catch (e) {
                 console.error("from userProfile_fetchPosts", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         fetchPosts()
@@ -71,6 +75,7 @@ const UserProfile = () => {
 
     const logout_handler = () => {
         authDispacth({ type: AUTH.LOGOUT })
+        darkSuccessToast(`You're successfully logged out.`)
     }
     const for_sm = useBreakpointValue({ base: true, md: false });
 
@@ -81,7 +86,7 @@ const UserProfile = () => {
             <Layout
                 is_loading={is_loading}
                 children={
-                    <Box maxW={"25rem"}>
+                    <Box className="flex_one">
                         <Flex p={for_sm ? "0" : "10px"} direction={"column"} gap={10}>
                             <Flex p={"10px"} gap={3} border={'1px solid grey'}>
                                 <Avatar name={`${firstName} ${lastName}`} src={displayImg} />

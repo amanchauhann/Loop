@@ -4,6 +4,7 @@ import { useAuth } from "../../../Contexts/AuthProvider"
 import { useUsers } from "../../../Contexts/UsersProvider"
 import { USERS } from "../../../Common/reducerTypes"
 import { Link } from "react-router-dom"
+import { errorToast } from "../../../utils"
 
 
 const Chip = ({ _id, displayImg, firstName, lastName, username }) => {
@@ -20,6 +21,7 @@ const Chip = ({ _id, displayImg, firstName, lastName, username }) => {
                 }
             } catch (e) {
                 console.error("from follow_chip", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         follow_user()

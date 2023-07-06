@@ -4,7 +4,7 @@ import { getUserEditService } from "../../../Services/userServices"
 import { useAuth } from "../../../Contexts/AuthProvider"
 import { AUTH } from "../../../Common/reducerTypes"
 import { base, robots_data } from "../../../Common/robots"
-import { upload_image } from "../../../utils"
+import { errorToast, upload_image } from "../../../utils"
 
 const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg, firstName, lastName }) => {
     const [update_bio, set_update_bio] = useState({
@@ -27,6 +27,7 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg, firstName
                 }
             } catch (e) {
                 console.error("from editProfileModal_update", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
         update_profile()
@@ -43,6 +44,7 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg, firstName
                 }
             } catch (e) {
                 console.error("from onUploadClick", e)
+                errorToast(`${e.status} there is some error`)
             }
         }
     }
