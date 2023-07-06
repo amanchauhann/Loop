@@ -173,6 +173,7 @@ export const posts = [
         }
       }
     ],
+    media: "https://res.cloudinary.com/dojsq93dk/image/upload/v1688067517/samples/sheep.jpg",
     username: "putin",
     createdAt: "2023-01-02T09:15:00+00:00",
     updatedAt: formatDate()
