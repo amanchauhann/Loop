@@ -23,7 +23,7 @@ const EditModal = ({ isOpen, onClose, content, _id, encoded_token }) => {
 
             } catch (e) {
                 console.error("from editModal_editPost", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         edit_post()

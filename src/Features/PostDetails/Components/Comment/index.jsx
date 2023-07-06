@@ -21,7 +21,7 @@ const Comment = ({ username, text }) => {
                 }
             } catch (e) {
                 console.error("from posts_getUser", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         get_this_user()

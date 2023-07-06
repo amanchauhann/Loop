@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (e) {
             console.error("error from auth provider", e)
-            errorToast(`${e.status}, there's some error.`)
+            errorToast(`${e.response.status}: ${e.response.data.errors}`)
         }
     }
 
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
             darkToast(`🦄 Welcome, ${data.createdUser.firstName}!`)
         } catch (e) {
             console.error("from signup", e)
-            errorToast(`${e.status}, there's some error.`)
+            errorToast(`${e.response.status}: ${e.response.data.errors}`)
         }
     }
     return (

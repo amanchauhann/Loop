@@ -27,7 +27,7 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg, firstName
                 }
             } catch (e) {
                 console.error("from editProfileModal_update", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         update_profile()
@@ -44,7 +44,7 @@ const EditProfileModal = ({ isOpen, onClose, bio, website, displayImg, firstName
                 }
             } catch (e) {
                 console.error("from onUploadClick", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
     }

@@ -23,7 +23,7 @@ const Nav = () => {
             }
         } catch (e) {
             console.error("from nav_fetch_users", e)
-            errorToast(`${e.status} there is some error`)
+            errorToast(`${e.response.status}: ${e.response.data.errors}`)
         }
     }
 

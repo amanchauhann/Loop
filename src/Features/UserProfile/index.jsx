@@ -34,7 +34,7 @@ const UserProfile = () => {
                 }
             } catch (e) {
                 console.error("from userProfile_getSingleUser", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         set_is_logged_user(user_details.username === user_name ? true : false)
@@ -51,7 +51,7 @@ const UserProfile = () => {
                 }
             } catch (e) {
                 console.error("from userProfile_followUnfollowHandler", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         follow_user()
@@ -67,7 +67,7 @@ const UserProfile = () => {
                 }
             } catch (e) {
                 console.error("from userProfile_fetchPosts", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         fetchPosts()

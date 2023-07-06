@@ -23,7 +23,7 @@ const AddComment = ({ _id }) => {
             }
         } catch (e) {
             console.error("from AddComment", e)
-            errorToast(`${e.status} there is some error`)
+            errorToast(`${e.response.status}: ${e.response.data.errors}`)
         }
     }
 

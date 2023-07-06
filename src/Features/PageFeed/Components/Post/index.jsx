@@ -48,7 +48,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
                 }
             } catch (e) {
                 console.error("from post_deletehandler", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         delete_post()
@@ -63,7 +63,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
 
         } catch (e) {
             console.error("from like_Post", e)
-            errorToast(`${e.status} there is some error`)
+            errorToast(`${e.response.status}: ${e.response.data.errors}`)
         }
     }
 
@@ -75,7 +75,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
             }
         } catch (e) {
             console.error("from bookmark_Post", e)
-            errorToast(`${e.status} there is some error`)
+            errorToast(`${e.response.status}: ${e.response.data.errors}`)
         }
     }
 

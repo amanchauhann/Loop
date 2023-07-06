@@ -29,6 +29,7 @@ const PostDetails = () => {
                 }
             } catch (e) {
                 console.error("from PostDetails_fetchSpecific", e)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         fetch_specific_post()
@@ -45,7 +46,7 @@ const PostDetails = () => {
                 }
             } catch (e) {
                 console.error("from postDetail_ fetchingComment", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         fetching_comment()

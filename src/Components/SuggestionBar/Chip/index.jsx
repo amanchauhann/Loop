@@ -21,7 +21,7 @@ const Chip = ({ _id, displayImg, firstName, lastName, username }) => {
                 }
             } catch (e) {
                 console.error("from follow_chip", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         follow_user()

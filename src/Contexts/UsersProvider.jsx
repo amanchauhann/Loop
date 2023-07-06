@@ -20,7 +20,7 @@ export const UsersProvider = ({ children }) => {
                 }
             } catch (e) {
                 console.error("error from UsersProvider", e)
-                errorToast(`${e.status} there is some error`)
+                errorToast(`${e.response.status}: ${e.response.data.errors}`)
             }
         }
         fetchUsers()
