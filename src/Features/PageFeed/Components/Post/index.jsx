@@ -14,6 +14,7 @@ import { useState } from "react"
 import { Avatar, useDisclosure } from "@chakra-ui/react"
 import EditModal from "./EditModal"
 import { getSpecificUserService } from "../../../../Services/userServices"
+import { darkRedToast } from "../../../../utils"
 
 const Post = ({ _id, username, content, likes, comments, media, createdAt }) => {
     const { allUsers: { users } } = useUsers()
@@ -43,6 +44,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
                 const { data, status } = await getDeletePostService(id, encodedToken)
                 if (status === 201) {
                     postsDispatch({ type: "INITIALISE_POSTS", payload: data.posts })
+                    darkRedToast("Post Deleted.")
                 }
             } catch (e) {
                 console.error("from post_deletehandler", e)

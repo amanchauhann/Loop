@@ -14,12 +14,25 @@ import Liked from './Features/Liked'
 import Bookmarks from './Features/Bookmarks'
 import UserProfile from './Features/UserProfile'
 import PostDetails from './Features/PostDetails'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        closeOnClick
+        rtl={false}
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
       <Routes>
         <Route element={<Private />}>
           <Route path="/" element={<PageFeed />} />

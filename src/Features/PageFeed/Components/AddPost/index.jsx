@@ -9,7 +9,7 @@ import { getAddPostService } from "../../../../Services/postServices";
 import { usePosts } from "../../../../Contexts/PostsProvider";
 import { POSTS } from "../../../../Common/reducerTypes";
 import { Avatar, Input } from "@chakra-ui/react";
-import { upload_image } from "../../../../utils";
+import { errorToast, infoToast, upload_image } from "../../../../utils";
 
 const AddPost = () => {
     const [post_content, set_post_content] = useState({
@@ -26,12 +26,14 @@ const AddPost = () => {
                 const { data, status } = await getAddPostService(post_content, encoded_token)
                 if (status === 201)
                     postsDispatch({ type: POSTS.INITIALISE, payload: data.posts })
+                infoToast("Posted sucessfully.")
                 set_post_content({
                     content: "",
                     media: ""
                 })
             } catch (e) {
                 console.error("from AddPost_handler", e)
+                errorToast(e.status, "there is some error")
             }
         }
         add_post()

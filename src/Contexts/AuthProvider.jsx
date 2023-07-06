@@ -5,6 +5,7 @@ import { getLoginService, getSignupService } from "../Services/authServices";
 import { useReducer } from "react";
 import { authReducer } from "../Reducers/authReducers";
 import { AUTH } from "../Common/reducerTypes";
+import { darkToast, errorToast } from "../utils";
 
 const AuthContext = createContext()
 
@@ -24,9 +25,11 @@ export const AuthProvider = ({ children }) => {
             const { foundUser, encodedToken } = data
             if (status === 200) {
                 authDispacth({ type: AUTH.LOGIN, payload: data })
+                darkToast(`🦄 Welcome, ${data.foundUser.firstName}!`)
             }
         } catch (e) {
             console.error("error from auth provider", e)
+            errorToast(`${e.status}, there's some error.`)
         }
     }
 
@@ -35,8 +38,10 @@ export const AuthProvider = ({ children }) => {
             const { data, status } = await getSignupService(credentials)
             if (status === 201)
                 authDispacth({ type: AUTH.SIGNUP, payload: data })
+            darkToast(`🦄 Welcome, ${data.createdUser.firstName}!`)
         } catch (e) {
             console.error("from signup", e)
+            errorToast(`${e.status}, there's some error.`)
         }
     }
     return (
