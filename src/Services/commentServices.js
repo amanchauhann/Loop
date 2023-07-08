@@ -10,3 +10,30 @@ export const getAddCommentService = (post_id, comment_data, authorization) =>
         { comment_data },
         { headers: { authorization } }
     );
+
+// /api/comments/like/:postId/:commentId
+export const likeCommentService = (postId, commentId, encoded_token) => {
+    console.log("from service>", encoded_token)
+    return axios.post(
+        `/api/comments/upvote/${postId}/${commentId}`,
+        {},
+        {
+            headers: {
+                authorization: encoded_token,
+            },
+        }
+    );
+};
+
+// /api/comments/dislike/:postId/:commentId
+export const dislikeCommentService = (postId, commentId, encoded_token) => {
+    return axios.post(
+        `/api/comments/downvote/${postId}/${commentId}`,
+        {},
+        {
+            headers: {
+                authorization: encoded_token,
+            },
+        }
+    );
+};
