@@ -13,7 +13,6 @@ export const getAddCommentService = (post_id, comment_data, authorization) =>
 
 // /api/comments/like/:postId/:commentId
 export const likeCommentService = (postId, commentId, encoded_token) => {
-    console.log("from service>", encoded_token)
     return axios.post(
         `/api/comments/upvote/${postId}/${commentId}`,
         {},
