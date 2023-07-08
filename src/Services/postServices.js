@@ -29,9 +29,7 @@ export const getEditPostService = (edited_post, post_id, encoded_token) => {
     return axios.post(
         `/api/posts/edit/${post_id}`,
         {
-            postData: {
-                content: edited_post
-            },
+            postData: edited_post,
         },
         {
             headers: {

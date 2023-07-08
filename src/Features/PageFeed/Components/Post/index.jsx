@@ -149,7 +149,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
                         {content}
                     </Text>
                 </Link>
-                {media && <img src={media} />}
+                {media && <img style={{ maxWidth: "25rem", margin: "auto" }} src={media} />}
                 <Divider />
                 <Flex>
                     {likes?.likedBy.find(({ _id }) => _id === user_details._id) ?
@@ -180,7 +180,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
                 </Flex>
                 <p>{createdAt.substring(0, 10).split('-').reverse().join('-')}</p>
             </Flex>
-            <EditModal isOpen={isOpen} onClose={onClose} content={content} _id={_id} encoded_token={encoded_token} />
+            <EditModal isOpen={isOpen} onClose={onClose} media={media} content={content} _id={_id} encoded_token={encoded_token} />
         </div>
     )
 }
