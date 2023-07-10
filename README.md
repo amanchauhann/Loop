@@ -58,7 +58,10 @@ $ npm start
 ## Demo Video
 
 
-https://github.com/amanchauhann/Loop/assets/44115421/1cf86325-39d5-4949-b03a-5d34d252916e
+
+
+
+https://github.com/amanchauhann/Loop/assets/44115421/6f3a1918-e330-49bc-811a-0b30a2b30268
 
 
 
