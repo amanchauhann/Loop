@@ -86,7 +86,7 @@ const UserProfile = () => {
             <Layout
                 is_loading={is_loading}
                 children={
-                    <Box className="flex_one">
+                    <Box w={"35rem"}>
                         <Flex p={for_sm ? "0" : "10px"} direction={"column"} gap={10}>
                             <Flex p={"10px"} gap={3} border={'1px solid grey'}>
                                 <Avatar name={`${firstName} ${lastName}`} src={displayImg} />

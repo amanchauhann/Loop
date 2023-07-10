@@ -56,7 +56,7 @@ const PostDetails = () => {
         <Layout
             is_loading={is_loading}
             children={
-                <Flex direction={"column"} gap={"3rem"} p={"10px"}>
+                <Flex w={"35rem"} direction={"column"} gap={"3rem"} p={"10px"}>
                     <>
                         <Post {...user_post} />
                         <AddComment _id={post_id} />
