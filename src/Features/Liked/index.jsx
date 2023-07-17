@@ -24,7 +24,7 @@ const Liked = () => {
                 </Box>
 
                 :
-                <Heading size="lg" mt="16" w={"35rem"} textAlign={"center"}>
+                <Heading size="lg" mt="16" w={"45rem"} textAlign={"center"}>
                     No Liked Posts Yet
                 </Heading>} />
         </>

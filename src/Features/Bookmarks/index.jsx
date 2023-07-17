@@ -23,7 +23,7 @@ const Bookmarks = () => {
                 <Post key={each_bookmarked._id} {...each_bookmarked} />)} />
         </Box>
         :
-        <Heading size="lg" mt="16" w={"35rem"} textAlign={"center"}>
+        <Heading size="lg" mt="16" w={"45rem"} textAlign={"center"}>
             No Bookmarks Yet
         </Heading>
 

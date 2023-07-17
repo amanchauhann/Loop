@@ -151,7 +151,7 @@ const UserProfile = () => {
                             {user_posts.length > 0 ?
                                 <PostsLayout children={user_posts.map(each_post => <Post key={each_post._id} {...each_post} />)} />
                                 :
-                                <Text align={"center"} fontSize={"lg"}>No Posts.</Text>
+                                <Text align={"center"} fontSize={"lg"} w={"45rem"}>No Posts.</Text>
                             }
                         </Flex >
                     </Box>
