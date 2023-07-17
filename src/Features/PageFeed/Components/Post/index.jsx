@@ -87,7 +87,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
 
     return (
         <div>
-            <Flex style={divider_border} p={"1rem"} gap={"1rem"} direction={"column"} className="bg_sec">
+            {current_user.username && <Flex style={divider_border} p={"1rem"} gap={"1rem"} direction={"column"} className="bg_sec">
                 <Flex justify={"space-between"}>
                     <Link to={`/profile/${username}`}>
                         <Flex gap={"10px"}>
@@ -179,7 +179,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
                     }
                 </Flex>
                 <p>{createdAt.substring(0, 10).split('-').reverse().join('-')}</p>
-            </Flex>
+            </Flex>}
             <EditModal isOpen={isOpen} onClose={onClose} media={media} content={content} _id={_id} encoded_token={encoded_token} />
         </div>
     )
