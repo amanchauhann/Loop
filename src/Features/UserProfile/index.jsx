@@ -13,6 +13,7 @@ import { useUsers } from "../../Contexts/UsersProvider"
 import EditProfileModal from "./EditProfileModal"
 import Layout from "../../Layout"
 import { darkSuccessToast, errorToast } from "../../utils"
+import "./main.css"
 
 const UserProfile = () => {
     const { user_name } = useParams()
@@ -87,8 +88,8 @@ const UserProfile = () => {
                 is_loading={is_loading}
                 children={
                     <Box w={"35rem"}>
-                        <Flex p={for_sm ? "0" : "10px"} direction={"column"} gap={10}>
-                            <Flex p={"10px"} gap={3} border={'1px solid grey'}>
+                        <Flex p={for_sm ? "10px" : "10px"} direction={"column"} gap={10}>
+                            <Flex className="profile_flex" p={"10px"} gap={3} border={'1px solid grey'}>
                                 <Avatar name={`${firstName} ${lastName}`} src={displayImg} />
                                 <Flex direction={"column"} gap={2}>
                                     <Flex justify={"space-between"}>

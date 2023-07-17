@@ -56,7 +56,8 @@ const PostDetails = () => {
         <Layout
             is_loading={is_loading}
             children={
-                <Flex w={"35rem"} direction={"column"} gap={"3rem"} p={"10px"}>
+                <Box w={"35rem"} p={"10px"}>
+<Flex direction={"column"} gap={"3rem"}>
                     <>
                         <Post {...user_post} />
                         <AddComment _id={post_id} />
@@ -69,6 +70,8 @@ const PostDetails = () => {
 
                     </>
                 </Flex>
+                </Box>
+                
             } />
     )
 }

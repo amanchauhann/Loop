@@ -80,7 +80,7 @@ const Login = () => {
     }
 
     return (
-        <Flex align={"center"} h={"100vh"} p={"5rem"} overflow={"hidden"} justify={"center"}>
+        <Flex align={"center"} h={"100vh"} p={only_large ? "5rem" : "3rem"} overflow={"hidden"} justify={"center"}>
             {only_large && <Box mx="auto" >
                 <Text
                     className={showBeat ? "beat-animation" : ""}
@@ -155,7 +155,7 @@ const Login = () => {
                                             _focus={{ outline: 'none' }}
                                             transition={"0.7s"}
                                             onClick={guest_handler}
-                                        >Login as Guest</Button>
+                                        >Guest Credentials</Button>
                                     </Flex>
                                 </Flex>
                             </FormControl>

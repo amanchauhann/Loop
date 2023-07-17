@@ -57,7 +57,7 @@ const AddPost = () => {
     }
 
     return (
-        <Flex style={divider_border} p={"1rem"} h={"fit-content"} direction={"column"} gap={"1rem"}>
+        <Flex style={divider_border} p={"10px"} h={"fit-content"} direction={"column"} gap={"1rem"}>
             <Flex gap={"1rem"} align={"center"}>
                 <Avatar
                     src={displayImg}
