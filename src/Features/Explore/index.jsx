@@ -13,7 +13,7 @@ const Explore = () => {
     return (
         <>
             <Layout children={
-                <Box flex={1} w={"15rem"}>
+                <Box w={"35rem"}>
                     <PostsLayout children={reversedPosts.map(eachPost => <Post key={eachPost._id} {...eachPost} />)} />
                 </Box>
 

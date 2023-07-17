@@ -149,7 +149,7 @@ const Post = ({ _id, username, content, likes, comments, media, createdAt }) => 
                         {content}
                     </Text>
                 </Link>
-                {media && <img style={{ maxWidth: "25rem", margin: "auto" }} src={media} />}
+                {media && <img style={{ margin: "auto" }} src={media} />}
                 <Divider />
                 <Flex>
                     {likes?.likedBy.find(({ _id }) => _id === user_details._id) ?
