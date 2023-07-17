@@ -37,7 +37,7 @@ const PageFeed = () => {
                 <Flex p={"10px"} maxW={"45rem"} direction={"column"} gap={"3rem"}>
                     <AddPost />
                     <Sort handle_select={handle_select} selected_button={selected_button} />
-                    {!feedPosts.length > 0 ?
+                    {feedPosts.length > 0 ?
                         <PostsLayout children={feedPosts.map(eachFeedPost => <Post key={eachFeedPost._id} {...eachFeedPost} />)} />
                         :
                         <Text w={"100%"}>Start Following someone to see their posts</Text>
