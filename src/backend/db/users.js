@@ -229,7 +229,7 @@ export const users = [
     password: "china123",
     bio: "General Secretary",
     website: "jinping.com",
-    displayImg: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Xi_Jinping_2023.jpg/330px-Xi_Jinping_2023.jpg",
+    displayImg: "https://res.cloudinary.com/dojsq93dk/image/upload/f_auto,q_auto/kmpbp7i1qztt0fnouxrm",
     followers: [],
     following: [],
     createdAt: "2023-06-10T22:44:17+05:30",
