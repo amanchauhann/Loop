@@ -18,7 +18,7 @@ const Bookmarks = () => {
 
 
     const bookmark_feed = bookmarked_posts.length > 0 ?
-        <Box w={"35rem"}>
+        <Box w={"45rem"}>
             <PostsLayout children={bookmarked_posts.map(each_bookmarked =>
                 <Post key={each_bookmarked._id} {...each_bookmarked} />)} />
         </Box>

@@ -56,7 +56,7 @@ const PostDetails = () => {
         <Layout
             is_loading={is_loading}
             children={
-                <Box w={"35rem"} p={"10px"}>
+                <Box w={"45rem"} p={"10px"}>
 <Flex direction={"column"} gap={"3rem"}>
                     <>
                         <Post {...user_post} />

@@ -18,7 +18,7 @@ const Liked = () => {
     return (
         <>
             <Layout children={liked_by_user.length > 0 ?
-                <Box w={"35rem"}>
+                <Box w={"45rem"}>
                     <PostsLayout children={liked_by_user.map(each_liked =>
                         <Post key={each_liked._id} {...each_liked} />)} />
                 </Box>

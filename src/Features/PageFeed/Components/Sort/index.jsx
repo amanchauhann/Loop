@@ -3,7 +3,7 @@ import { Button, Flex } from "@chakra-ui/react"
 const Sort = ({ handle_select, selected_button }) => {
     return (
         <>
-            <Flex>
+            <Flex gap={5}>
                 <Button
                     flex={1}
                     bg={selected_button === "latest" ? "transparent" : "rgb(246, 226, 194)"}
