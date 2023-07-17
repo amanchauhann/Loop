@@ -34,13 +34,13 @@ const PageFeed = () => {
     return (
         <>
             <Layout children={
-                <Flex p={"10px"} maxW={"45rem"} direction={"column"} gap={"3rem"}>
+                <Flex p={"10px"} w={"45rem"} direction={"column"} gap={"3rem"}>
                     <AddPost />
                     <Sort handle_select={handle_select} selected_button={selected_button} />
                     {feedPosts.length > 0 ?
                         <PostsLayout children={feedPosts.map(eachFeedPost => <Post key={eachFeedPost._id} {...eachFeedPost} />)} />
                         :
-                        <Text w={"100%"}>Start Following someone to see their posts</Text>
+                        <Text>Start Following someone to see their posts</Text>
                     }
                 </Flex>
             } />
